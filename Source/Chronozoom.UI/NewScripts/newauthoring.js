@@ -331,13 +331,17 @@ var CZ = (function (CZ, $, document) {
                         _selectedTimeline = _hovered.parent;
                     }
                     that.showEditTimelineForm(_selectedTimeline);
-                } else if (that._isActive) {
+                } else if (that._isActive && that.mode === "editExhibit") {
+                    if (_hovered && vcwidget.currentlyHoveredContentItem) {
+                        that.showEditContentItemForm(vcwidget.currentlyHoveredContentItem, vcwidget.currentlyHoveredInfodot);
+                    }
 
                 }
             }
 
-            this.showCreateTimelineForm = formHandlers && formHandlers.showCreateTimelineForm || function () { };
-            this.showEditTimelineForm = formHandlers && formHandlers.showEditTimelineForm || function () { };
+            this.showCreateTimelineForm = formHandlers && formHandlers.showCreateTimelineForm || function () {};
+            this.showEditTimelineForm = formHandlers && formHandlers.showEditTimelineForm || function () {};
+            this.showEditContentItemForm = formHandlers && formHandlers.showEditContentItemForm || function () {};
         },
 
         /**
@@ -373,6 +377,40 @@ var CZ = (function (CZ, $, document) {
          */
         removeTimeline: function (t) {
             removeChild(t.parent, t.id);
+        },
+
+        updateContentItem: function (c, e, args) {
+            for (prop in args)
+                if (c.contentItem.hasOwnProperty(prop))
+                    c.contentItem[prop] = args[prop];
+
+            //var id = c.id;
+            //var x = c.x;
+            //var y = c.y;
+            //var h = c.height;
+            //var w = c.width;
+            //var ci = c.contentItem;
+            var vyc = e.y + e.height / 2;
+            var time = e.x + e.width / 2;
+            var id = e.id;
+            var cis = e.contentItems;
+            var descr = e.infodotDescription;
+            var parent = e.parent;
+            var radv = e.outerRad;
+            try {
+                //clear(c);
+                // remove and then adding infodot to position content items properly
+                removeChild(parent, id);
+                addInfodot(parent, "layerInfodots", id, time, vyc, radv, cis, descr);
+            }
+            catch (ex) {
+
+            };
+        },
+
+        removeContentItem: function (c) {
+            delete c.contentItem;
+            removeChild(c.parent, c.id);
         },
 
         createInfodot: function (infodot) {
