@@ -1,0 +1,70 @@
+﻿<!--HTML code of the form-->
+<div class="cz-form-header">
+    <ul>
+        <li class="cz-form-nav">
+            
+        </li>
+        <li class="cz-form-title">
+            Save CI Form
+        </li>
+        <li class="cz-form-close-btn">
+            <a class="cz-form-btn">
+                <-
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div id="editContentItemForm" class="cz-form-content">
+    This is CI form
+    <p id ="title"> 
+        <label>Title</label>
+        <input class='cz-authoring-ci-title' style='display: block' type='text'/>
+    </p>
+
+    <p id ="description"> 
+        <label>Description</label>
+        <input class='cz-authoring-ci-description' style='display: block' type='text'/>
+    </p>
+
+     <p id ="mediaSource"> 
+        <label>URL of image or video</label>
+        <input class='cz-authoring-ci-uri' style='display: block' type='text'/>
+    </p>
+
+     <p id ="mediaType"> 
+        <label>Media type</label>
+         <select class='cz-authoring-ci-media-type' style='display: block'> 
+             <option value='image'>Image</option>
+             <option value='pdf'>PDF</option> 
+             <option value='video'>Video</option>
+             <option value='audio'>Audio</option>
+        </select>
+     </p>
+
+     <p id ="attribution"> 
+        <label>Attribution</label>
+        <input class='cz-authoring-ci-attribution' style='display: block' type='text'/>
+    </p>
+
+    <p id ="mediaSourceURL"> 
+        <label>Media Source</label>
+        <input class='cz-authoring-ci-media-source' style='display: block' type='text'/>
+    </p>
+
+     <button id="SaveCIButton">Test</button>
+</div>
+
+<!--
+This is a possible solution for style.
+However, if this style used by other elements
+then it's better to place it in cz.css.
+-->
+<style>
+    #SaveCIButton {
+        width: 100px;
+        height: 50px;
+        background-color: #993333;
+        display: block;
+    }
+</style>

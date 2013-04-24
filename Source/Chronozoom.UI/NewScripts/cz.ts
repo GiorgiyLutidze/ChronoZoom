@@ -19,11 +19,16 @@ module CZ {
         var _uiMap = {
             "#auth-event-form": "/ui/auth-event-form.html",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "#editContentItemForm": "/../samples/custom-form/CreateCIForm.html"
 =======
             "#auth-create-timeline-form": "/ui/auth-create-timeline-form.html",
             "#auth-edit-timeline-form": "/ui/auth-edit-timeline-form.html"
 >>>>>>> 78b44f34ff5f63a5055ba3e11044164d93886e2c
+=======
+            "#auth-create-timeline-form": "/ui/auth-create-timeline-form.html",
+            "#auth-edit-timeline-form": "/ui/auth-edit-timeline-form.html"
+>>>>>>> 1bdcb24c63c5ae8bdd47b2c09e7d441cb5c6eeef
         };
 
         $(document).ready(function () {
@@ -40,6 +45,7 @@ module CZ {
             CZ.Common.initialize();
             CZ.UILoader.loadAll(_uiMap).done(function () {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 var vc = (<any>$)('#vc');
                 vc.virtualCanvas();
                 var forms = arguments;
@@ -54,6 +60,8 @@ module CZ {
                         //CZ.Authoring.UI.showEditContentItemForm
                     }
 =======
+=======
+>>>>>>> 1bdcb24c63c5ae8bdd47b2c09e7d441cb5c6eeef
                 var forms = arguments;
 
                 CZ.Authoring.initialize(CZ.Common.vc, {
@@ -89,7 +97,10 @@ module CZ {
                     showCreateExhibitForm: CZ.Authoring.UI.showCreateExhibitForm,
                     showEditExhibitForm: CZ.Authoring.UI.showEditExhibitForm,
                     showEditContentItemForm: CZ.Authoring.UI.showEditContentItemForm
+<<<<<<< HEAD
 >>>>>>> 78b44f34ff5f63a5055ba3e11044164d93886e2c
+=======
+>>>>>>> 1bdcb24c63c5ae8bdd47b2c09e7d441cb5c6eeef
                 });
                 // TODO: Get UI components.
             });

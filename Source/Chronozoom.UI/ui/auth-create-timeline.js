@@ -28,7 +28,11 @@ var CZ;
                 this.saveButton.click(function (event) {
                     var isValid = CZ.Authoring.ValidateTimelineData(_this.startDate.getDate(), _this.endDate.getDate(), _this.titleInput.val());
                     if(!isValid) {
+<<<<<<< HEAD
                         _this.container.find("#TimelineErrorSpan").css("display", "block");
+=======
+                        _this.container.find("#error-create-timeline").css("display", "block");
+>>>>>>> 1bdcb24c63c5ae8bdd47b2c09e7d441cb5c6eeef
                     }
                     if(isValid) {
                         var self = _this;
@@ -55,7 +59,11 @@ var CZ;
                 if(this.isCancel) {
                     CZ.Authoring.removeTimeline(this.timeline);
                 }
+<<<<<<< HEAD
                 CZ.Authoring.isActive = false;
+=======
+                CZ.Authoring._isActive = false;
+>>>>>>> 1bdcb24c63c5ae8bdd47b2c09e7d441cb5c6eeef
                 this.container.hide("slow", function (event) {
                     _this.endDate.remove();
                     _this.startDate.remove();
