@@ -78,7 +78,7 @@ module CZ {
                 * Returns an array of contentItems filled with user data.
                 * @return {Array}  An array of contentItems.
                 */
-           export function _getContentItemsData() {
+            function _getContentItemsData() {
                 var contentItems = [];
 
                 var containers = $(".cz-authoring-ci-container");

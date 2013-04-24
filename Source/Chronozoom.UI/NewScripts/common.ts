@@ -64,6 +64,7 @@ module CZ {
             CZ.VirtualCanvas.initialize();
             vc = (<any>$)('#vc');
             vc.virtualCanvas();
+<<<<<<< HEAD
 
 /*            CZ.Authoring.initialize(vc, {
                 showCreateTimelineForm: CZ.Authoring.UI.showCreateTimelineForm,
@@ -72,6 +73,8 @@ module CZ {
                 showEditExhibitForm: CZ.Authoring.UI.showEditExhibitForm,
                 showEditContentItemForm: CZ.Authoring.UI.showEditContentItemForm
             });*/
+=======
+>>>>>>> 78b44f34ff5f63a5055ba3e11044164d93886e2c
         }
         
         

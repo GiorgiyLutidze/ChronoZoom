@@ -1220,19 +1220,20 @@ img.fallbackBackground {
 
 .cz-form {
     position: absolute;
-    top: 4.6875%; /* 36 / 768 */
+    top: 36px; /*4.6875%;*/ /* 36 / 768 */
     left: 0;
     z-index: 100000001;
     display: none;
     width: 30.2734375%; /* 310 / 1024 */
     height: 92.05729166666667%; /* (768 - 36 - 25) / 768 */
     cursor: default;
+    min-width: 320px;
 }
 
 .cz-form-header {
     position: relative;
     width: 100%;
-    height: 5.37482319660537%; /* 38 / (768 - 36 - 25) */
+    height: 38px; /*5.37482319660537%;*/ /* 38 / (768 - 36 - 25) */
     background-color: #0464A2;
 }
 
@@ -1246,7 +1247,7 @@ img.fallbackBackground {
 
 .cz-form-title {
     float: left;
-    margin-left: 4.19354838709677%; /* 13 / 310 */
+    margin-left: 13px;/*4.19354838709677%;*/ /* 13 / 310 */
     height: 100%;
     color: #fff;
     font-size: 1.5em;
@@ -1255,7 +1256,7 @@ img.fallbackBackground {
 
 .cz-form-close-btn {
     float: right;
-    margin-right: 4.19354838709677%; /* 13 / 310 */
+    margin-right: 13px;/*4.19354838709677%;*/ /* 13 / 310 */
     color: #fff;
     font-weight: bold;
     font-size: 1.5em;
@@ -1267,7 +1268,7 @@ img.fallbackBackground {
 }
 
 .cz-form-content {
-    padding: 1.94319880418535% 4.19354838709677%; /* 13 / 669; 13 / 310 */
+    padding: 13px 13px;/*1.94319880418535% 4.19354838709677%;*/ /* 13 / 669; 13 / 310 */
     height: 94.62517680339463%; /* ((768 - 36 - 25) - 38) / (768 - 36 - 25) */
     background-color: #fff;
     color: #aeaeae;
