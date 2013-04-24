@@ -3,7 +3,9 @@ var CZ;
     var HomePageViewModel;
     (function (HomePageViewModel) {
         var _uiMap = {
-            "#auth-event-form": "/ui/auth-event-form.html"
+            "#auth-event-form": "/ui/auth-event-form.html",
+            "#auth-create-timeline-form": "/ui/auth-create-timeline-form.html",
+            "#auth-edit-timeline-form": "/ui/auth-edit-timeline-form.html"
         };
         $(document).ready(function () {
             window.console = window.console || (function () {
@@ -16,6 +18,41 @@ var CZ;
             $('.bubbleInfo').hide();
             CZ.Common.initialize();
             CZ.UILoader.loadAll(_uiMap).done(function () {
+                var forms = arguments;
+                CZ.Authoring.initialize(CZ.Common.vc, {
+                    showCreateTimelineForm: function (timeline) {
+                        var form = new CZ.UI.FormCreateTimeline(forms[1], {
+                            activationSource: $("a:contains('create timeline')"),
+                            navButton: ".cz-form-nav",
+                            closeButton: ".cz-form-close-btn > .cz-form-btn",
+                            titleTextblock: ".cz-form-title",
+                            startDate: ".cz-form-time-start",
+                            endDate: ".cz-form-time-end",
+                            saveButton: ".cz-form-save",
+                            titleInput: ".cz-form-item-title",
+                            context: timeline
+                        });
+                        form.show();
+                    },
+                    showEditTimelineForm: function (timeline) {
+                        var form = new CZ.UI.FormEditTimeline(forms[2], {
+                            activationSource: $("#showButton"),
+                            navButton: ".cz-form-nav",
+                            closeButton: ".cz-form-close-btn > .cz-form-btn",
+                            titleTextblock: ".cz-form-title",
+                            startDate: ".cz-form-time-start",
+                            endDate: ".cz-form-time-end",
+                            saveButton: ".cz-form-save",
+                            deleteButton: ".cz-form-delete",
+                            titleInput: ".cz-form-item-title",
+                            context: timeline
+                        });
+                        form.show();
+                    },
+                    showCreateExhibitForm: CZ.Authoring.UI.showCreateExhibitForm,
+                    showEditExhibitForm: CZ.Authoring.UI.showEditExhibitForm,
+                    showEditContentItemForm: CZ.Authoring.UI.showEditContentItemForm
+                });
             });
             var url = CZ.UrlNav.getURL();
             var rootCollection = url.superCollectionName === undefined;
@@ -289,7 +326,7 @@ var CZ;
                 y: 0,
                 width: 13700000000,
                 height: 5535444444.444445
-            }, 1.0, vp), true);
+            }, 1.0, vp, false), true);
             CZ.Common.updateAxis(CZ.Common.vc, CZ.Common.ax);
             var bid = window.location.hash.match("b=([a-z0-9_]+)");
             if(bid) {
