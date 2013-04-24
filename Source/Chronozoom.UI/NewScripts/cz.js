@@ -3,7 +3,8 @@ var CZ;
     var HomePageViewModel;
     (function (HomePageViewModel) {
         var _uiMap = {
-            "#auth-event-form": "/ui/auth-event-form.html"
+            "#auth-event-form": "/ui/auth-event-form.html",
+            "#editContentItemForm": "/../samples/custom-form/CreateCIForm.html"
         };
         $(document).ready(function () {
             window.console = window.console || (function () {
@@ -16,6 +17,19 @@ var CZ;
             $('.bubbleInfo').hide();
             CZ.Common.initialize();
             CZ.UILoader.loadAll(_uiMap).done(function () {
+                var vc = ($)('#vc');
+                vc.virtualCanvas();
+                var forms = arguments;
+                CZ.Authoring.initialize(vc, {
+                    showCreateTimelineForm: CZ.Authoring.UI.showCreateTimelineForm,
+                    showEditTimelineForm: CZ.Authoring.UI.showEditTimelineForm,
+                    showCreateExhibitForm: CZ.Authoring.UI.showCreateExhibitForm,
+                    showEditExhibitForm: CZ.Authoring.UI.showEditExhibitForm,
+                    showEditContentItemForm: function (contentItem) {
+                        var form = new CZ.Authoring.UI.showEditContentItemForm();
+                        form.show();
+                    }
+                });
             });
             var url = CZ.UrlNav.getURL();
             var rootCollection = url.superCollectionName === undefined;

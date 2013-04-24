@@ -129,6 +129,9 @@ var CZ;
                 marker.css("display", "none");
                 RightPanInput();
             }
+            var test1 = CZ.Dates.getYearsBetweenDates(10, 1, 1, -10, 1, 1);
+            var test2 = CZ.Dates.getYearsBetweenDates(-10, 1, 1, 10, 1, 1);
+            console.log(test1, test2);
         });
         function init() {
             _container.addClass("cz-timescale");
@@ -513,7 +516,8 @@ var CZ;
                 var right_pan_val = document.getElementById('timescale_right_border').innerHTML;
                 var left_pan_val = leftDateInput.val();
                 var timerange;
-                timerange = _tickSources[_mode].getLeftPanelVirtualCoord(left_pan_val, right_pan_val, old_left_val, _range);
+                var k = (_range.max - _range.min) / _width;
+                timerange = _tickSources[_mode].getLeftPanelVirtualCoord(left_pan_val, right_pan_val, old_left_val, _range, CZ.Settings.panelWidth * k);
                 leftDateInput.css("display", "none");
                 leftDate.css("display", "block");
                 LeftInputShown = false;
@@ -548,7 +552,9 @@ var CZ;
                 var left_pan_val = document.getElementById('timescale_left_border').innerHTML;
                 var right_pan_val = rightDateInput.val();
                 var timerange;
-                timerange = _tickSources[_mode].getRightPanelVirtualCoord(left_pan_val, right_pan_val, old_right_val, _range);
+                var k = (_range.max - _range.min) / _width;
+                console.log(CZ.Settings.panelWidth * k);
+                timerange = _tickSources[_mode].getRightPanelVirtualCoord(left_pan_val, right_pan_val, old_right_val, _range, CZ.Settings.panelWidth * k);
                 if(timerange != null) {
                     rightDateInput.css("display", "none");
                     rightDate.css("display", "block");
@@ -740,7 +746,7 @@ var CZ;
         this.getMarkerLabel = function (range, time) {
             return time;
         };
-        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_right_val, range) {
+        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_right_val, range, eps) {
             return rightstr;
         };
         this.getLeftPanelVirtualCoord = function (leftstr, rightstr, old_left_val, range) {
@@ -876,7 +882,7 @@ var CZ;
             Labeltext += " " + this.regime;
             return Labeltext;
         };
-        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_rightstr, range) {
+        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_rightstr, range, eps) {
             var left_val = parseFloat(leftstr);
             var left_reg = leftstr.split(/\W+/g);
             var right_val = parseFloat(rightstr);

@@ -223,6 +223,9 @@
     <Compile Include="ACS\Util\NameValueCollectionExtensions.cs" />
     <Compile Include="ACS\Util\RequireAuthenticationAttribute.cs" />
     <Content Include="ACS\FederationMetadata\2007-06\FederationMetadata.xml" />
+    <Content Include="samples\custom-form\CreateCIForm.html" />
+    <Content Include="samples\custom-form\CreateCIForm.js" />
+    <Content Include="samples\custom-form\CreateCIform.ts" />
     <Content Include="samples\custom-form\form-example.html" />
     <Content Include="samples\custom-form\form-example.js" />
     <Content Include="samples\custom-form\form-example.ts" />

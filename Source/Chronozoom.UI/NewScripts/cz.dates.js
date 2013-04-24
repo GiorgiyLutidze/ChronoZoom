@@ -125,6 +125,7 @@ var CZ;
             var res = years + days / 365;
             return -res;
         }
+        Dates.getYearsBetweenDates = getYearsBetweenDates;
         function getDateFrom(year, month, day, n) {
             var endYear = year;
             var endMonth = month;
@@ -142,9 +143,6 @@ var CZ;
             }
             endDay += Math.round(nDays);
             var tempDays = Dates.daysInMonth[endMonth];
-            if(isLeapYear(endYear)) {
-                tempDays++;
-            }
             while(endDay > tempDays) {
                 endDay -= tempDays;
                 endMonth++;
@@ -153,9 +151,6 @@ var CZ;
                     endYear++;
                 }
                 tempDays = Dates.daysInMonth[endMonth];
-                if(isLeapYear(endYear)) {
-                    tempDays++;
-                }
             }
             if(endYear < 0 && year > 0) {
                 endYear -= 1;

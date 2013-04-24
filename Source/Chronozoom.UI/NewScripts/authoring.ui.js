@@ -58,6 +58,7 @@ var CZ;
                 });
                 return contentItems;
             }
+            UI._getContentItemsData = _getContentItemsData;
             function _fillContentItemForm(form, contentItem) {
                 var titleInput = form.find(".cz-authoring-ci-title");
                 var mediaInput = form.find(".cz-authoring-ci-uri");

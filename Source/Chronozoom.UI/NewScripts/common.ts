@@ -65,13 +65,13 @@ module CZ {
             vc = (<any>$)('#vc');
             vc.virtualCanvas();
 
-            CZ.Authoring.initialize(vc, {
+/*            CZ.Authoring.initialize(vc, {
                 showCreateTimelineForm: CZ.Authoring.UI.showCreateTimelineForm,
                 showEditTimelineForm: CZ.Authoring.UI.showEditTimelineForm,
                 showCreateExhibitForm: CZ.Authoring.UI.showCreateExhibitForm,
                 showEditExhibitForm: CZ.Authoring.UI.showEditExhibitForm,
                 showEditContentItemForm: CZ.Authoring.UI.showEditContentItemForm
-            });
+            });*/
         }
         
         

@@ -119,10 +119,10 @@ module CZ {
         // y1, m1, d1 is first date (year, month, day)
         // y2, m2, d2 is second date (year, month, day)
         // returns count of years between given dates
-        function getYearsBetweenDates(y1, m1, d1, y2, m2, d2) {
+        export function getYearsBetweenDates(y1, m1, d1, y2, m2, d2) {
             // get full years and month passed
             var years = y2 - y1;
-
+            
             if (y2 > 0 && y1 < 0)
                 years -= 1;
 
@@ -148,7 +148,7 @@ module CZ {
 
             // add plus 1 day to make 1 january as 0 offset from year
             days += 1;
-            var res = years + days / 365;
+            var res = years + days / 365;       //todo:add leap years
             return -res;
         }
 
@@ -180,7 +180,7 @@ module CZ {
             endDay += Math.round(nDays);
             // get count of days in current month
             var tempDays = daysInMonth[endMonth];
-            if (isLeapYear(endYear)) tempDays++;
+            //if (isLeapYear(endYear)) tempDays++;
             // if result day is bigger than count of days then one more month has passed too            
             while (endDay > tempDays) {
                 endDay -= tempDays;
@@ -190,7 +190,7 @@ module CZ {
                     endYear++;
                 }
                 tempDays = daysInMonth[endMonth];
-                if (isLeapYear(endYear)) tempDays++;
+            //if (isLeapYear(endYear)) tempDays++;
             }
             if (endYear < 0 && year > 0)
                 endYear -= 1;

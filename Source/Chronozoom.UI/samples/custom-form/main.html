@@ -8,6 +8,8 @@
     <script type="text/javascript" src="/NewScripts/uiloader.js"></script>
     <script type="text/javascript" src="/NewScripts/controls/formbase.js"></script>
     <script type="text/javascript" src="form-example.js"></script>
+    <script type="text/javascript" src="CreateCIForm.js"></script>
+
 
     <style>
         #formExample {
@@ -22,16 +24,26 @@
 
     <script>
         $(document).ready(function () {
-            CZ.UILoader.loadHtml("#formExample", "form-example.html").done(function (container) {
+            //           CZ.UILoader.loadHtml("#formExample", "form-example.html").done(function (container) {
+                CZ.UILoader.loadHtml("#formExample", "CreateCIform.html").done(function (container) {
+ 
                 // Create form. The second parameter defined by FormBaseInfo and FormTestInfo interfaces.
                 // activationSource is an element, which calls this form.
                 // The rest of fields are CSS selectors of form's UI elements.
-                var form = new FormTest(container, {
+  /*              var form = new FormTest(container, {
                     activationSource: $("#showButton"),
                     navButton: ".cz-form-nav",
                     closeButton: ".cz-form-close-btn > .cz-form-btn",
                     titleTextblock: ".cz-form-title",
                     testButton: "#testButton"
+                });*/
+
+                var form = new FormTest(container, {
+                    activationSource: $("#showButton"),
+                    navButton: ".cz-form-nav",
+                    closeButton: ".cz-form-close-btn > .cz-form-btn",
+                    titleTextblock: ".cz-form-title",
+                    SaveCIButton: "#SaveCIButton"
                 });
 
                 $("#showButton").click(function () {

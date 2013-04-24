@@ -169,7 +169,11 @@ module CZ {
            if  (time >= _range.max - CZ.Settings.panelWidth * k) {
                marker.css("display", "none");
                RightPanInput();
-             }
+           }
+           var test1 = CZ.Dates.getYearsBetweenDates( 10, 1, 1,-10, 1, 1);
+           var test2 = CZ.Dates.getYearsBetweenDates(-10, 1, 1, 10, 1, 1);
+
+           console.log(test1,test2);
        });
 
 
@@ -676,7 +680,9 @@ module CZ {
                 var right_pan_val = document.getElementById('timescale_right_border').innerHTML;
                 var left_pan_val = leftDateInput.val();
                 var timerange;
-                timerange = _tickSources[_mode].getLeftPanelVirtualCoord(left_pan_val, right_pan_val, old_left_val, _range);
+                var k = (_range.max - _range.min) / _width;
+
+                timerange = _tickSources[_mode].getLeftPanelVirtualCoord(left_pan_val, right_pan_val, old_left_val, _range, CZ.Settings.panelWidth * k);
 
                 leftDateInput.css("display", "none");
                 leftDate.css("display", "block");
@@ -705,7 +711,9 @@ module CZ {
                 var left_pan_val = document.getElementById('timescale_left_border').innerHTML;
                 var right_pan_val = rightDateInput.val();
                 var timerange;
-                timerange = _tickSources[_mode].getRightPanelVirtualCoord(left_pan_val, right_pan_val, old_right_val, _range);
+                var k = (_range.max - _range.min) / _width;
+                console.log(CZ.Settings.panelWidth * k);
+                timerange = _tickSources[_mode].getRightPanelVirtualCoord(left_pan_val, right_pan_val, old_right_val, _range, CZ.Settings.panelWidth * k);
                 if (timerange != null) {
                     rightDateInput.css("display", "none");
                     rightDate.css("display", "block");
@@ -940,7 +948,7 @@ module CZ {
             return time;
         };
         // returns coordinate of  str
-        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_right_val,range) {
+        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_right_val,range,eps) {
             return rightstr;
         }
         this.getLeftPanelVirtualCoord = function (leftstr, rightstr, old_left_val, range) {
@@ -1093,7 +1101,7 @@ module CZ {
             return Labeltext;
         };
 
-        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_rightstr, range) {
+        this.getRightPanelVirtualCoord = function (leftstr, rightstr, old_rightstr, range, eps) {
             var left_val = parseFloat(leftstr);
             var left_reg = leftstr.split(/\W+/g);
 
@@ -1107,7 +1115,9 @@ module CZ {
             var right_regime = right_reg[right_reg.length - 1];
             var old_right_regime = old_right_reg[old_right_reg.length - 1];
 
-            var k = (right_val - left_val)/(old_right_val - left_val);
+            //console.log(eps);
+
+            var k = (right_val - left_val)/(old_right_val - left_val );
             if (range.min < this.range.min) range.min = this.range.min;
             if (range.max > this.range.max) range.max = this.range.max;
 

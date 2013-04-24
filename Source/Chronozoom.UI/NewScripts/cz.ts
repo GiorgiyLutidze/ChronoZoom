@@ -15,7 +15,8 @@ module CZ {
     module HomePageViewModel {
         // Contains mapping: CSS selector -> html file.
         var _uiMap = {
-            "#auth-event-form": "/ui/auth-event-form.html"
+            "#auth-event-form": "/ui/auth-event-form.html",
+            "#editContentItemForm": "/../samples/custom-form/CreateCIForm.html"
         };
 
         $(document).ready(function () {
@@ -31,6 +32,20 @@ module CZ {
 
             CZ.Common.initialize();
             CZ.UILoader.loadAll(_uiMap).done(function () {
+                var vc = (<any>$)('#vc');
+                vc.virtualCanvas();
+                var forms = arguments;
+                CZ.Authoring.initialize(vc, {
+                    showCreateTimelineForm: CZ.Authoring.UI.showCreateTimelineForm,
+                    showEditTimelineForm: CZ.Authoring.UI.showEditTimelineForm,
+                    showCreateExhibitForm: CZ.Authoring.UI.showCreateExhibitForm,
+                    showEditExhibitForm: CZ.Authoring.UI.showEditExhibitForm,
+                    showEditContentItemForm: function (contentItem) {
+                        var form = new CZ.Authoring.UI.showEditContentItemForm();
+                        form.show();
+                        //CZ.Authoring.UI.showEditContentItemForm
+                    }
+                });
                 // TODO: Get UI components.
             });
 
