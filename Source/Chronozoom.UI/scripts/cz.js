@@ -186,7 +186,6 @@ var CZ;
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
             CZ.StartPage.InitializeStartVideo();
             $('.bubbleInfo').hide();
-            var canvasIsEmpty;
             var url = CZ.UrlNav.getURL();
             HomePageViewModel.rootCollection = url.superCollectionName === undefined;
             CZ.Service.superCollectionName = url.superCollectionName;
@@ -320,6 +319,23 @@ var CZ;
                         });
                         form.show();
                     },
+                    showCreateRootTimelineForm: function (timeline) {
+                        CZ.Authoring.mode = "createRootTimeline";
+                        var form = new CZ.UI.FormEditTimeline(forms[1], {
+                            activationSource: $(".header-icon.edit-icon"),
+                            navButton: ".cz-form-nav",
+                            closeButton: ".cz-form-close-btn > .cz-form-btn",
+                            titleTextblock: ".cz-form-title",
+                            startDate: ".cz-form-time-start",
+                            endDate: ".cz-form-time-end",
+                            saveButton: ".cz-form-save",
+                            deleteButton: ".cz-form-delete",
+                            titleInput: ".cz-form-item-title",
+                            errorMessage: "#error-edit-timeline",
+                            context: timeline
+                        });
+                        form.show();
+                    },
                     showEditTimelineForm: function (timeline) {
                         var form = new CZ.UI.FormEditTimeline(forms[1], {
                             activationSource: $(".header-icon.edit-icon"),
@@ -397,9 +413,6 @@ var CZ;
                         form.show(noAnimation);
                     }
                 });
-                if(canvasIsEmpty) {
-                    CZ.Authoring.showCreateTimelineForm(defaultRootTimeline);
-                }
                 HomePageViewModel.sessionForm = new CZ.UI.FormHeaderSessionExpired(forms[15], {
                     activationSource: $("#header-session-expired-form"),
                     navButton: ".cz-form-nav",
@@ -425,9 +438,12 @@ var CZ;
                     }
                     CZ.Common.loadData().then(function (response) {
                         if(!response) {
-                            canvasIsEmpty = true;
-                            if(CZ.Authoring.showCreateTimelineForm) {
-                                CZ.Authoring.showCreateTimelineForm(defaultRootTimeline);
+                            if(CZ.Authoring.isEnabled) {
+                                if(CZ.Authoring.showCreateRootTimelineForm) {
+                                    CZ.Authoring.showCreateRootTimelineForm(defaultRootTimeline);
+                                }
+                            } else {
+                                CZ.Authoring.showMessageWindow("Looks like this collection is empty. Come back later when author will fill it with content.", "Collection is empty :(");
                             }
                         }
                     });

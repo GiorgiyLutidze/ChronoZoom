@@ -239,7 +239,6 @@ module CZ {
             CZ.StartPage.InitializeStartVideo();
 
             $('.bubbleInfo').hide();
-            var canvasIsEmpty;
 
             var url = CZ.UrlNav.getURL();
             rootCollection = url.superCollectionName === undefined;
@@ -391,6 +390,23 @@ module CZ {
                         });
                         form.show();
                     },
+                    showCreateRootTimelineForm: function (timeline) {
+                        CZ.Authoring.mode = "createRootTimeline";
+                        var form = new CZ.UI.FormEditTimeline(forms[1], {
+                            activationSource: $(".header-icon.edit-icon"),
+                            navButton: ".cz-form-nav",
+                            closeButton: ".cz-form-close-btn > .cz-form-btn",
+                            titleTextblock: ".cz-form-title",
+                            startDate: ".cz-form-time-start",
+                            endDate: ".cz-form-time-end",
+                            saveButton: ".cz-form-save",
+                            deleteButton: ".cz-form-delete",
+                            titleInput: ".cz-form-item-title",
+                            errorMessage: "#error-edit-timeline",
+                            context: timeline
+                        });
+                        form.show();
+                    },
                     showEditTimelineForm: function (timeline) {
                         var form = new CZ.UI.FormEditTimeline(forms[1], {
                             activationSource: $(".header-icon.edit-icon"),
@@ -469,10 +485,6 @@ module CZ {
                     }
                 });
 
-                if (canvasIsEmpty) {
-                    CZ.Authoring.showCreateTimelineForm(defaultRootTimeline);
-                }
-
                 sessionForm = new CZ.UI.FormHeaderSessionExpired(forms[15], {
                     activationSource: $("#header-session-expired-form"),
                     navButton: ".cz-form-nav",
@@ -500,10 +512,21 @@ module CZ {
 
                     //retrieving the data
                     CZ.Common.loadData().then(function (response) {
+                        // collection is empty
                         if (!response) {
-                            canvasIsEmpty = true;
-                            if (CZ.Authoring.showCreateTimelineForm) {
-                                CZ.Authoring.showCreateTimelineForm(defaultRootTimeline);
+                            // author should create a root timeline
+                            // TODO: store 'user' variable in CZ that is the response of getProfile()
+                            if (CZ.Authoring.isEnabled) {
+                                if (CZ.Authoring.showCreateRootTimelineForm) {
+                                    CZ.Authoring.showCreateRootTimelineForm(defaultRootTimeline);
+                                }
+                            }
+                            // show message for other users that collection is empty
+                            else {
+                                CZ.Authoring.showMessageWindow(
+                                    "Looks like this collection is empty. Come back later when author will fill it with content.",
+                                    "Collection is empty :("
+                                );
                             }
                         }
                     });
