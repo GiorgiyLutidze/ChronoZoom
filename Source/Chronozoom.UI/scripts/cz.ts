@@ -28,6 +28,7 @@
 /// <reference path='typings/jquery/jquery.d.ts'/>
 /// <reference path='extensions/extensions.ts'/>
 /// <reference path='../ui/media/skydrive-mediapicker.ts'/>
+/// <reference path='../ui/start-page.ts'/>
 
 var constants: any;
 
@@ -226,6 +227,16 @@ module CZ {
                 return c;
             })();
 
+
+
+            CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1); /* featured Timelines */
+            //CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 2); /* popular Timelines */
+            CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list",1); /* featured Timelines */
+
+            CZ.StartPage.cloneTweetTemplate( "#template-tweet .tweet-box", CZ.StartPage.tileLayout, 2); /* Tweeted Timelines */
+            CZ.StartPage.TwitterLayout( CZ.StartPage.tileLayout, 2); 
+
+            CZ.StartPage.InitializeStartVideo();
 
             $('.bubbleInfo').hide();
             var canvasIsEmpty;

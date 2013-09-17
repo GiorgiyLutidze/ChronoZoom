@@ -53,13 +53,23 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="css\cz.min.css">
+      <DependentUpon>cz.less</DependentUpon>
+    </Content>
     <Content Include="css\media.css">
       <DependentUpon>media.less</DependentUpon>
+    </Content>
+    <Content Include="css\start-page.css">
+      <DependentUpon>start-page.less</DependentUpon>
+    </Content>
+    <Content Include="css\start-page.min.css">
+      <DependentUpon>start-page.less</DependentUpon>
     </Content>
     <Content Include="dumps\extensions\rin-sample.js" />
     <Content Include="dumps\sample.csv" />
     <Content Include="dumps\extensions-get.json" />
     <Content Include="css\media.less" />
+    <Content Include="css\start-page.less" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -584,6 +594,11 @@
     </Content>
     <Content Include="css\Site.css" />
     <Content Include="ui\message-window.html" />
+    <TypeScriptCompile Include="ui\start-page.ts" />
+    <Content Include="ui\start-page.html" />
+    <Content Include="ui\start-page.js">
+      <DependentUpon>start-page.ts</DependentUpon>
+    </Content>
     <Content Include="ui\timeseries-data-form.html" />
     <TypeScriptCompile Include="ui\timeseries-data-form.ts" />
     <Content Include="ui\timeseries-data-form.js">
@@ -638,6 +653,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\dummy\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
