@@ -257,13 +257,15 @@
                     <div class="welcome-box-2">
                         ChronoZoom is an educational tool for teachers and students who want to put historical events in perspective.
                         A great many resources have been created already in ChronoZoom for your enjoyment and enlightenment.
-                         <a style="color:green"; onclick ="document.getElementById('start-page').style.display = 'none';">Enter Here.</a>
+                        <!-- <a style="color:green"; onclick ="document.getElementById('start-page').style.display = 'none';">Enter Here.</a>-->
+                         <a style="color:green"; onclick =" CZ.StartPage.hide();">Enter Here.</a>
                     </div>
                <!-- <div class="cleardiv"></div>-->
                     <div class="welcome-box-3">
                         Use ChronoZoom to get a perspective of the extensive scale of time and historical events relative to what happened around the world.
                         Become and author yourself, simply log on with your social networking credentials to record your unique perspective or tell a story that needs to be told.
-                        <a style="color:green"; onclick ="document.getElementById('start-page').style.display = 'none';CZ.Tours.activateTour(CZ.Tours.tours[0], true);">Take Intro Tour.</a>
+                      <!--  <a style="color:green"; onclick ="document.getElementById('start-page').style.display = 'none';CZ.Tours.tours[1].play();">Take Intro Tour.</a>-->
+                        <a style="color:green"; onclick ="CZ.StartPage.hide();CZ.Tours.activateTour(CZ.Tours.tours[0], true);">Take Intro Tour.</a>
                     </div>
                                  <!-- <div id="welcome4">
                         <a href="#" class="welcome-cta-link-1">Watch an Intro Video <img src="images/video_intro.gif" alt="Watch an Intro Video"></a>
@@ -273,7 +275,8 @@
               <!--  class="start-page-section-column unselectable"-->
                 <div id="FT-icon-heading" style="color:white;border-top: 3px #666 solid;">              
                     <div><h3 style="float:left;">Featured Timelines</h3></div>
-                    <div class="toggle-list-button" style="float:right;margin: 18px 10px 0 0;"><a onclick="CZ.StartPage.listFlip('FeaturedTimelinesBlock');"> <img src="Images/dummy/list-expander2.png" alt="Expand List"> </img></a>
+                    <div class="toggle-list-button" style="float:right;margin: 18px 10px 0 0;"><a onclick="CZ.StartPage.listFlip('FeaturedTimelinesBlock');">
+                         <img src="Images/dummy/list-expander2.png" alt="Expand List"/> </a>
                     </div>
                     <div class="cleardiv"></div>
                       </div>

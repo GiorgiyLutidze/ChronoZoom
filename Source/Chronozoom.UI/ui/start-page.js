@@ -138,8 +138,8 @@ var CZ;
                     var text = response.d[i].Text;
                     var author = response.d[i].User.Name;
                     var time = response.d[i].User.CreatedDate;
-                    $("#m" + idx + "i" + i + " .box .tile-meta .tile-meta-text").text(text);
-                    $("#m" + idx + "i" + i + " .box .tile-meta .tile-meta-author").text(author);
+                    $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-text").text(text);
+                    $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-author").text(author);
                 }
             });
         }
@@ -188,11 +188,11 @@ var CZ;
         StartPage.hide = hide;
         function initialize() {
             $(".home-icon").toggle(show, hide);
-            cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
-            cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
-            cloneTweetTemplate("#template-tweet .tweet-box", CZ.StartPage.tileLayout, 2);
-            TwitterLayout(CZ.StartPage.tileLayout, 2);
-            InitializeStartVideo();
+            CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
+            CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
+            CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2);
+            CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
+            CZ.StartPage.InitializeStartVideo();
         }
         StartPage.initialize = initialize;
     })(CZ.StartPage || (CZ.StartPage = {}));

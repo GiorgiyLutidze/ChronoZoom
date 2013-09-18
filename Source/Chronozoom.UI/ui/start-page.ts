@@ -241,14 +241,17 @@ module CZ {
 
         export function initialize() {
             $(".home-icon").toggle(show, hide);
+            
+             CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1); /* featured Timelines */
+            //CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 2); /* popular Timelines */
+            CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list",1); /* featured Timelines */
 
-            cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1); /* featured Timelines */
-            cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list",1); /* featured Timelines */
+            CZ.StartPage.cloneTweetTemplate( "#template-tweet .box", CZ.StartPage.tileLayout, 2); /* Tweeted Timelines */
+            CZ.StartPage.TwitterLayout( CZ.StartPage.tileLayout, 2); 
 
-            cloneTweetTemplate("#template-tweet .tweet-box", CZ.StartPage.tileLayout, 2); /* Tweeted Timelines */
-            TwitterLayout(CZ.StartPage.tileLayout, 2); 
+            CZ.StartPage.InitializeStartVideo();
 
-            InitializeStartVideo();
+
         }
     }
 }
