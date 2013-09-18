@@ -282,6 +282,7 @@
     <Content Include="images\credits\ucb.png" />
     <Content Include="images\credits\uw.png" />
     <Content Include="images\edit-icon.png" />
+    <Content Include="images\home-icon.png" />
     <Content Include="images\media\bing-import-50x150.png" />
     <Content Include="images\media\bing-import-50x50.png" />
     <Content Include="images\media\SkyDrive-Import-50X150.png" />
