@@ -12761,6 +12761,36 @@ var CZ;
             $("#StartVideoHolder").append(elem);
         }
         StartPage.InitializeStartVideo = InitializeStartVideo;
+        function show() {
+            var $disabledButtons = $(".tour-icon, .timeSeries-icon, .edit-icon");
+            $(".home-icon").addClass("active");
+            $disabledButtons.attr("disabled", "disabled").each(function (i, el) {
+                var events = $(el).data("events");
+                $(el).data("onclick", events && events.click && events.click[0]);
+            }).off();
+            $(".header-regimes").fadeOut();
+            $("#start-page").fadeIn();
+        }
+        StartPage.show = show;
+        function hide() {
+            var $disabledButtons = $(".tour-icon, .timeSeries-icon, .edit-icon");
+            $(".home-icon").removeClass("active");
+            $disabledButtons.removeAttr("disabled").each(function (i, el) {
+                $(el).click($(el).data("onclick"));
+            });
+            $(".header-regimes").fadeIn();
+            $("#start-page").fadeOut();
+        }
+        StartPage.hide = hide;
+        function initialize() {
+            $(".home-icon").toggle(show, hide);
+            cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
+            cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
+            cloneTweetTemplate("#template-tweet .tweet-box", CZ.StartPage.tileLayout, 2);
+            TwitterLayout(CZ.StartPage.tileLayout, 2);
+            InitializeStartVideo();
+        }
+        StartPage.initialize = initialize;
     })(CZ.StartPage || (CZ.StartPage = {}));
     var StartPage = CZ.StartPage;
 })(CZ || (CZ = {}));
@@ -12948,9 +12978,15 @@ var CZ;
             })();
             CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
             CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
+            CZ.StartPage.cloneTweetTemplate("#template-tweet .tweet-box", CZ.StartPage.tileLayout, 2);
+            CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
+            CZ.StartPage.InitializeStartVideo();
+            CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
+            CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
             CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2);
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
             CZ.StartPage.InitializeStartVideo();
+            CZ.StartPage.initialize();
             $('.bubbleInfo').hide();
             var url = CZ.UrlNav.getURL();
             HomePageViewModel.rootCollection = url.superCollectionName === undefined;

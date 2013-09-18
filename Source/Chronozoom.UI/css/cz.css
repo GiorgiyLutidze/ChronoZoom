@@ -948,11 +948,18 @@ a:visited {
   background-repeat: no-repeat;
   background-position: center;
 }
+.header-icon.active {
+  background-color: #0464a2;
+}
 .header-icon[data-enabled~="true"]:hover {
   background-color: #0464a2;
 }
-.header-icon.active {
-  background-color: #0464a2;
+.header-icon[disabled="disabled"] {
+  opacity: 0.5;
+}
+.header-icon[disabled="disabled"].active,
+.header-icon[disabled="disabled"]:hover {
+  background-color: transparent;
 }
 .tour-icon {
   background-image: url('../images/tour-icon.png');
@@ -969,6 +976,9 @@ a:visited {
 }
 .edit-icon {
   background-image: url('../images/edit-icon.png');
+}
+.home-icon {
+  background-image: url('../images/home-icon.png');
 }
 .profile-icon {
   background-image: url('../images/profile-icon.png');
