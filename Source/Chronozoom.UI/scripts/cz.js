@@ -182,7 +182,7 @@ var CZ;
             })();
             CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
             CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
-            CZ.StartPage.cloneTweetTemplate("#template-tweet .tweet-box", CZ.StartPage.tileLayout, 2);
+            CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2);
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
             CZ.StartPage.InitializeStartVideo();
             $('.bubbleInfo').hide();

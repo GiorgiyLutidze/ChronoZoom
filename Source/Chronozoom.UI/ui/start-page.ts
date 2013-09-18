@@ -144,7 +144,7 @@ module CZ {
         export function cloneTweetTemplate(template, target, idx){
             for( var i=0;i<target[idx].Visibility.length;i++){
                 var o=$(template).clone( true, true).appendTo(target[idx].Name);
-                o.attr("class","tweet-"+target[idx].Visibility[i]);
+                o.attr("class",target[idx].Visibility[i]);
                 o.attr("id","m"+idx+"i"+i);
                 /*
                 $("#m"+idx+"i"+i+" .boxInner .tile-photo img").attr("src",tileData[i].Thumbnail).attr("alt",tileData[i].Title);

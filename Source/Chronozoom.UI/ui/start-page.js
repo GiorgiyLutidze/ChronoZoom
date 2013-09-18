@@ -127,7 +127,7 @@ var CZ;
         function cloneTweetTemplate(template, target, idx) {
             for(var i = 0; i < target[idx].Visibility.length; i++) {
                 var o = $(template).clone(true, true).appendTo(target[idx].Name);
-                o.attr("class", "tweet-" + target[idx].Visibility[i]);
+                o.attr("class", target[idx].Visibility[i]);
                 o.attr("id", "m" + idx + "i" + i);
             }
         }
@@ -138,8 +138,8 @@ var CZ;
                     var text = response.d[i].Text;
                     var author = response.d[i].User.Name;
                     var time = response.d[i].User.CreatedDate;
-                    $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-text").text(text);
-                    $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-author").text(author);
+                    $("#m" + idx + "i" + i + " .box .tile-meta .tile-meta-text").text(text);
+                    $("#m" + idx + "i" + i + " .box .tile-meta .tile-meta-author").text(author);
                 }
             });
         }

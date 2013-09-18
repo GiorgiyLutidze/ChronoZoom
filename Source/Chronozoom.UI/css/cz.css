@@ -313,7 +313,6 @@ iframe[sutra=picker] + div {
   left: 0%;
   right: 0%;
   min-width: 300px;
-  border-radius: 8px;
   background-color: #000000;
   cursor: default;
   overflow: hidden;
@@ -498,7 +497,6 @@ iframe[sutra=picker] + div {
   left: 10px;
   right: 10px;
   top: 10px;
-  bottom: 10px;
   overflow: visible;
 }
 .boxInner img {
