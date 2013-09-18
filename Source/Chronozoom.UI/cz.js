@@ -12976,7 +12976,6 @@ var CZ;
                 };
                 return c;
             })();
-            CZ.StartPage.initialize();
             $('.bubbleInfo').hide();
             var url = CZ.UrlNav.getURL();
             HomePageViewModel.rootCollection = url.superCollectionName === undefined;
@@ -13486,6 +13485,8 @@ var CZ;
                 }));
                 $("#bibliographyBack").css("display", "block");
             }
+            CZ.StartPage.show();
+            CZ.StartPage.initialize();
         });
         function IsFeatureEnabled(featureMap, featureName) {
             var feature = $.grep(featureMap, function (e) {

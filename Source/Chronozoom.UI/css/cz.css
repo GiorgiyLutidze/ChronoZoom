@@ -308,8 +308,8 @@ iframe[sutra=picker] + div {
 ***********************************************************/
 .start-page-screen {
   position: absolute;
-  top: 5%;
-  bottom: 3%;
+  top: 38px;
+  bottom: 20px;
   left: 0%;
   right: 0%;
   min-width: 300px;

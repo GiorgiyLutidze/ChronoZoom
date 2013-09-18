@@ -226,11 +226,7 @@ module CZ {
                     c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function () { };
                 return c;
             })();
-
-
-
-           CZ.StartPage.initialize();
-
+           
             $('.bubbleInfo').hide();
 
             var url = CZ.UrlNav.getURL();
@@ -838,6 +834,8 @@ module CZ {
                 }));
                 $("#bibliographyBack").css("display", "block");
             }
+            CZ.StartPage.show();
+            CZ.StartPage.initialize();
         });
 
         export function IsFeatureEnabled(featureMap: FeatureInfo[], featureName: string) {
