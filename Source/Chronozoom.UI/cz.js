@@ -12729,6 +12729,11 @@ var CZ;
             }
         }
         StartPage.cloneTweetTemplate = cloneTweetTemplate;
+        function PlayIntroTour() {
+            var toursListForm = CZ.HomePageViewModel.getFormById("#toursList");
+            toursListForm.toursListBox.TakeTour(CZ.Tours.tours[0]);
+        }
+        StartPage.PlayIntroTour = PlayIntroTour;
         function TwitterLayout(target, idx) {
             CZ.Service.getRecentTweets().done(function (response) {
                 for(var i = 0, len = response.d.length; i < len; ++i) {
@@ -13317,6 +13322,8 @@ var CZ;
                         loginForm.close();
                     }
                 });
+                CZ.StartPage.show();
+                CZ.StartPage.initialize();
             });
             CZ.Service.getServiceInformation().then(function (response) {
                 CZ.Settings.contentItemThumbnailBaseUri = response.thumbnailsPath;
@@ -13490,8 +13497,6 @@ var CZ;
                 }));
                 $("#bibliographyBack").css("display", "block");
             }
-            CZ.StartPage.show();
-            CZ.StartPage.initialize();
         });
         function IsFeatureEnabled(featureMap, featureName) {
             var feature = $.grep(featureMap, function (e) {

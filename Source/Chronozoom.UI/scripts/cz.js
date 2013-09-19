@@ -516,6 +516,8 @@ var CZ;
                         loginForm.close();
                     }
                 });
+                CZ.StartPage.show();
+                CZ.StartPage.initialize();
             });
             CZ.Service.getServiceInformation().then(function (response) {
                 CZ.Settings.contentItemThumbnailBaseUri = response.thumbnailsPath;
@@ -689,8 +691,6 @@ var CZ;
                 }));
                 $("#bibliographyBack").css("display", "block");
             }
-            CZ.StartPage.show();
-            CZ.StartPage.initialize();
         });
         function IsFeatureEnabled(featureMap, featureName) {
             var feature = $.grep(featureMap, function (e) {

@@ -318,6 +318,7 @@ iframe[sutra=picker] + div {
   overflow: hidden;
   z-index: 1000;
   background-image: url(http://localhost:4949/images/background.jpg);
+  background-size: 100% ;
 }
 .start-page-section-column {
   float: left;

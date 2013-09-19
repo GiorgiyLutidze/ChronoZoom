@@ -154,6 +154,11 @@ module CZ {
             }
         }
 
+        export function PlayIntroTour() {
+        var toursListForm = CZ.HomePageViewModel.getFormById("#toursList");
+        toursListForm.toursListBox.TakeTour(CZ.Tours.tours[0]);
+        }
+
         export function TwitterLayout( target, idx) {
 
               CZ.Service.getRecentTweets().done(response => {

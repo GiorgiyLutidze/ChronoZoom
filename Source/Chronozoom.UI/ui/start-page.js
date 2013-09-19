@@ -132,6 +132,11 @@ var CZ;
             }
         }
         StartPage.cloneTweetTemplate = cloneTweetTemplate;
+        function PlayIntroTour() {
+            var toursListForm = CZ.HomePageViewModel.getFormById("#toursList");
+            toursListForm.toursListBox.TakeTour(CZ.Tours.tours[0]);
+        }
+        StartPage.PlayIntroTour = PlayIntroTour;
         function TwitterLayout(target, idx) {
             CZ.Service.getRecentTweets().done(function (response) {
                 for(var i = 0, len = response.d.length; i < len; ++i) {
