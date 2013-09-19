@@ -214,8 +214,8 @@ var CZ;
                         marginTop = ($this.height() - $this.width()) / 2;
                     }
                     $this.css({
-                        top: -marginTop,
-                        left: -marginLeft
+                        "margin-top": -marginTop + "px",
+                        "margin-left": -marginLeft + "px"
                     });
                 }).attr({
                     src: timeline.ImageUrl,

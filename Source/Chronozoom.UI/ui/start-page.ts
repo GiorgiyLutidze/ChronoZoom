@@ -190,15 +190,7 @@ module CZ {
                     document.getElementById(name+'-tiles').style.display = 'block';
                 }
         }
-        /*     var elem = document.createElement('iframe');
-             elem.setAttribute("id", id);
-             if (videoSrc.indexOf('?') == -1)
-                 videoSrc += '?wmode=opaque';
-             else
-                 videoSrc += '&wmode=opaque';
-             elem.setAttribute("src", videoSrc);
-             elem.setAttribute("visible", 'true');
-             elem.setAttribute("controls", 'true');*/
+
 
         export function InitializeStartVideo() {
             var id = "StartVideoId";
@@ -267,8 +259,8 @@ module CZ {
                     }
 
                     $this.css({
-                        top: -marginTop,
-                        left: -marginLeft
+                        "margin-top": -marginTop + "px",
+                        "margin-left": -marginLeft + "px"
                     });
                 }).attr({
                     src: timeline.ImageUrl,

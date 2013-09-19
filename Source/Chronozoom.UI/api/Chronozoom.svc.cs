@@ -2212,8 +2212,8 @@ namespace Chronozoom.UI
             {
                 if (user == null) {
                     // NOTE: Use this for test with anonymous user.
-                    // user = new User() { Id = new Guid("63c4373e-6712-44a6-9bb4-b99a2783f53a") };
-                    return false;
+                     user = new User() { Id = new Guid("63c4373e-6712-44a6-9bb4-b99a2783f53a") };
+                    //return false;
                 }
                 return storage.PutTriplet(String.Format("czusr:{0}", user.Id), "czpred:featured", String.Format("cztimeline:{0}", faturedGUID));
             });
