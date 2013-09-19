@@ -5707,6 +5707,7 @@ var CZ;
         function goToSearchResult(resultId, elementType) {
             var element = findVCElement(CZ.Common.vc.virtualCanvas("getLayerContent"), resultId, elementType);
             var navStringElement = CZ.UrlNav.vcelementToNavString(element);
+            CZ.StartPage.hide();
             var visible = CZ.UrlNav.navStringToVisible(navStringElement, CZ.Common.vc);
             CZ.Common.controller.moveToVisible(visible);
         }
@@ -12733,9 +12734,14 @@ var CZ;
                 for(var i = 0, len = response.d.length; i < len; ++i) {
                     var text = response.d[i].Text;
                     var author = response.d[i].User.Name;
-                    var time = response.d[i].User.CreatedDate;
+                    var time = response.d[i].CreatedDate;
+                    var myDate = new Date(time.match(/\d+/)[0] * 1);
+                    var convertedDate = myDate.toLocaleTimeString() + "; " + myDate.getDate();
+                    convertedDate += "." + myDate.getMonth() + "." + myDate.getFullYear();
+                    console.log(response);
                     $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-text").text(text);
                     $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-author").text(author);
+                    $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-time").text(convertedDate);
                 }
             });
         }
@@ -12788,7 +12794,6 @@ var CZ;
             CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
             CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2);
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
-            CZ.StartPage.InitializeStartVideo();
         }
         StartPage.initialize = initialize;
     })(CZ.StartPage || (CZ.StartPage = {}));

@@ -289,7 +289,9 @@
     <Content Include="images\dummy\icon_timeseries.png" />
     <Content Include="images\dummy\icon_twitter.png" />
     <Content Include="images\dummy\icon_user.png" />
-    <Content Include="images\dummy\list-expander2.png" />
+    <Content Include="images\dummy\list-expander2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\dummy\tile_akhttomb.jpg" />
     <Content Include="images\dummy\tile_bighistory.jpg" />
     <Content Include="images\dummy\tile_cern.jpg" />

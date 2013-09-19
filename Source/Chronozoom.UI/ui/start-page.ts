@@ -160,10 +160,14 @@ module CZ {
                  for (var i = 0, len = response.d.length; i < len; ++i) {
                 var  text =  response.d[i].Text;
                 var  author = response.d[i].User.Name;
-                var  time = response.d[i].User.CreatedDate;
+                var  time = response.d[i].CreatedDate;
+                var myDate = new Date(time.match(/\d+/)[0] * 1);
+                var convertedDate = myDate.toLocaleTimeString() +"; "+  myDate.getDate();
+                convertedDate += "." + myDate.getMonth() + "." + myDate.getFullYear();
+                console.log(response);
                 $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-text").text(text);
                 $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-author").text(author);
-
+                 $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-time").text(convertedDate);
                  }
         
             });
@@ -248,9 +252,6 @@ module CZ {
 
             CZ.StartPage.cloneTweetTemplate( "#template-tweet .box", CZ.StartPage.tileLayout, 2); /* Tweeted Timelines */
             CZ.StartPage.TwitterLayout( CZ.StartPage.tileLayout, 2); 
-
-            CZ.StartPage.InitializeStartVideo();
-
 
         }
     }

@@ -308,7 +308,7 @@ iframe[sutra=picker] + div {
 ***********************************************************/
 .start-page-screen {
   position: absolute;
-  top: 38px;
+  top: 33px;
   bottom: 20px;
   left: 0%;
   right: 0%;
@@ -479,6 +479,9 @@ iframe[sutra=picker] + div {
   font-size: 12px;
   display: block;
 }
+.tile-meta-time {
+  font-size: 12px;
+}
 .tile-meta-text {
   font-weight: normal;
   color: #999;
@@ -528,21 +531,23 @@ iframe[sutra=picker] + div {
   .WelcomeBlock {
     width: calc(98%);
     height: calc(20%);
-    overflow: auto;
+    overflow: hidden;
   }
   .welcome-box-1 {
     padding: 0px;
     font-size: 10px;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: visible;
     height: calc(40%);
   }
   .welcome-box-2 {
+    float: left;
     height: calc(60%);
     font-size: 11px;
     overflow: auto;
   }
   .welcome-box-3 {
+    float: left;
     display: none;
   }
 }
@@ -630,11 +635,13 @@ iframe[sutra=picker] + div {
     height: calc(50%);
   }
   .welcome-box-2 {
+    float: left;
     height: calc(30%);
     font-size: 14px;
     overflow: auto;
   }
   .welcome-box-3 {
+    float: left;
     overflow: auto;
     display: none;
   }
@@ -708,16 +715,21 @@ iframe[sutra=picker] + div {
     box-sizing: border-box;
   }
   .welcome-box-1 {
-    padding: 5px 5px 10px 5px;
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
+    overflow: visible;
+    vertical-align: top;
+    font-size: 15px;
   }
   .welcome-box-2 {
-    overflow: auto;
+    float: left;
+    overflow: visible;
     height: calc(30%);
   }
   .welcome-box-3 {
-    overflow: auto;
+    float: left;
+    overflow: visible;
+    vertical-align: top;
   }
   /* Medium desktop: 6 columns, 3 rows */
 }
@@ -979,6 +991,9 @@ a:visited {
 }
 .home-icon {
   background-image: url('../images/home-icon.png');
+}
+.toggle-list-button {
+  background-image: url('../images/dummy/list-expander2.png');
 }
 .profile-icon {
   background-image: url('../images/profile-icon.png');
