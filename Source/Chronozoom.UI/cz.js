@@ -231,6 +231,7 @@
         Settings.mediapickerVideoThumbnailMaxHeight = 130;
         Settings.WLAPIClientID = "0000000040101FFA";
         Settings.WLAPIRedirectUrl = "http://test.chronozoom.com/";
+        Settings.errorMessageSlideDuration = 0;
     })(CZ.Settings || (CZ.Settings = {}));
     var Settings = CZ.Settings;
 })(CZ || (CZ = {}));
@@ -3906,6 +3907,101 @@ var CZ;
             return result;
         }
         Service.getMimeTypeByUrl = getMimeTypeByUrl;
+        function getUserFavorites() {
+            var result = "";
+            CZ.Authoring.resetSessionTimer();
+            var request = new Service.Request(_serviceUrl);
+            request.addToPath("getuserfavorites");
+            return $.ajax({
+                type: "GET",
+                cache: false,
+                contentType: "application/json",
+                url: request.url
+            });
+        }
+        Service.getUserFavorites = getUserFavorites;
+        function deleteUserFavorite(guid) {
+            var result = "";
+            CZ.Authoring.resetSessionTimer();
+            var request = new Service.Request(_serviceUrl);
+            request.addToPath("deleteuserfavorite");
+            if(guid == "") {
+                return null;
+            }
+            request.addParameter("guid", guid);
+            return $.ajax({
+                type: "GET",
+                cache: false,
+                contentType: "application/json",
+                url: request.url
+            });
+        }
+        Service.deleteUserFavorite = deleteUserFavorite;
+        function putUserFavorite(guid) {
+            var result = "";
+            CZ.Authoring.resetSessionTimer();
+            var request = new Service.Request(_serviceUrl);
+            request.addToPath("putuserfavorite");
+            if(guid == "") {
+                return null;
+            }
+            request.addParameter("guid", guid);
+            return $.ajax({
+                type: "GET",
+                cache: false,
+                contentType: "application/json",
+                url: request.url
+            });
+        }
+        Service.putUserFavorite = putUserFavorite;
+        function getUserFeatured(guid) {
+            var result = "";
+            CZ.Authoring.resetSessionTimer();
+            var request = new Service.Request(_serviceUrl);
+            request.addToPath("getuserfeatured");
+            request.addParameter("guid", guid);
+            return $.ajax({
+                type: "GET",
+                cache: false,
+                contentType: "application/json",
+                url: request.url
+            });
+        }
+        Service.getUserFeatured = getUserFeatured;
+        function deleteUserFeatured(guid) {
+            var result = "";
+            CZ.Authoring.resetSessionTimer();
+            var request = new Service.Request(_serviceUrl);
+            request.addToPath("deleteuserfeatured");
+            if(guid == "") {
+                return null;
+            }
+            request.addParameter("guid", guid);
+            return $.ajax({
+                type: "GET",
+                cache: false,
+                contentType: "application/json",
+                url: request.url
+            });
+        }
+        Service.deleteUserFeatured = deleteUserFeatured;
+        function putUserFeatured(guid) {
+            var result = "";
+            CZ.Authoring.resetSessionTimer();
+            var request = new Service.Request(_serviceUrl);
+            request.addToPath("putuserfeatured");
+            if(guid == "") {
+                return null;
+            }
+            request.addParameter("guid", guid);
+            return $.ajax({
+                type: "GET",
+                cache: false,
+                contentType: "application/json",
+                url: request.url
+            });
+        }
+        Service.putUserFeatured = putUserFeatured;
     })(CZ.Service || (CZ.Service = {}));
     var Service = CZ.Service;
 })(CZ || (CZ = {}));
@@ -4453,7 +4549,7 @@ var CZ;
                     deferred.resolve(newExhibit);
                 }, function (error) {
                     console.log("Error connecting to service: update exhibit.\n" + error.responseText);
-                    deferred.reject();
+                    deferred.reject(error);
                 });
             } else {
                 deferred.reject();
@@ -4497,7 +4593,7 @@ var CZ;
                     deferred.resolve();
                 }, function (error) {
                     console.log("Error connecting to service: update content item.\n" + error.responseText);
-                    deferred.reject();
+                    deferred.reject(error);
                 });
             } else {
                 deferred.reject();
@@ -4535,7 +4631,7 @@ var CZ;
         function validateExhibitData(date, title, contentItems) {
             var isValid = date !== false;
             isValid = isValid && CZ.Authoring.isNotEmpty(title);
-            isValid = isValid && CZ.Authoring.validateContentItems(contentItems);
+            isValid = isValid && CZ.Authoring.validateContentItems(contentItems, null);
             return isValid;
         }
         Authoring.validateExhibitData = validateExhibitData;
@@ -4551,7 +4647,7 @@ var CZ;
             return (parseFloat(start) + 1 / 366 <= parseFloat(end));
         }
         Authoring.isIntervalPositive = isIntervalPositive;
-        function validateContentItems(contentItems) {
+        function validateContentItems(contentItems, mediaInput) {
             var isValid = true;
             if(contentItems.length == 0) {
                 return false;
@@ -4566,7 +4662,9 @@ var CZ;
                     var imageReg = /\.(jpg|jpeg|png|gif)$/i;
                     if(!imageReg.test(ci.uri)) {
                         if(mime != "image/jpg" && mime != "image/jpeg" && mime != "image/gif" && mime != "image/png") {
-                            alert("Sorry, only JPG/PNG/GIF images are supported.");
+                            if(mediaInput) {
+                                mediaInput.showError("Sorry, only JPG/PNG/GIF images are supported.");
+                            }
                             isValid = false;
                         }
                     }
@@ -4582,14 +4680,18 @@ var CZ;
                         ci.uri = "http://player.vimeo.com/video/" + vimeoVideoId;
                     } else if(vimeoEmbed.test(ci.uri)) {
                     } else {
-                        alert("Sorry, only YouTube or Vimeo videos are supported.");
+                        if(mediaInput) {
+                            mediaInput.showError("Sorry, only YouTube or Vimeo videos are supported.");
+                        }
                         isValid = false;
                     }
                 } else if(ci.mediaType.toLowerCase() === "pdf") {
                     var pdf = /\.(pdf)$|\.(pdf)\?/i;
                     if(!pdf.test(ci.uri)) {
                         if(mime != "application/pdf") {
-                            alert("Sorry, only PDF extension is supported.");
+                            if(mediaInput) {
+                                mediaInput.showError("Sorry, only PDF extension is supported.");
+                            }
                             isValid = false;
                         }
                     }
@@ -4605,7 +4707,9 @@ var CZ;
                     var width = /[0-9]/;
                     var height = /[0-9]/;
                     if(!skydrive.test(splited[0]) || !width.test(splited[1]) || !height.test(splited[2])) {
-                        alert("This is not a Skydrive embed link.");
+                        if(mediaInput) {
+                            mediaInput.showError("This is not a Skydrive embed link.");
+                        }
                         isValid = false;
                     }
                 }
@@ -11177,6 +11281,7 @@ var CZ;
         var FormEditTimeline = (function (_super) {
             __extends(FormEditTimeline, _super);
             function FormEditTimeline(container, formInfo) {
+                var _this = this;
                         _super.call(this, container, formInfo);
                 this.saveButton = container.find(formInfo.saveButton);
                 this.deleteButton = container.find(formInfo.deleteButton);
@@ -11187,6 +11292,9 @@ var CZ;
                 this.timeline = formInfo.context;
                 this.saveButton.off();
                 this.deleteButton.off();
+                this.titleInput.focus(function () {
+                    _this.titleInput.hideError();
+                });
                 this.initialize();
             }
             FormEditTimeline.prototype.initialize = function () {
@@ -11219,14 +11327,13 @@ var CZ;
                     this.endDate.setDate(this.timeline.x + this.timeline.width, true);
                 }
                 this.saveButton.click(function (event) {
-                    _this.startDate.setDate("d");
-                    var result = _this.startDate.getDate();
                     _this.errorMessage.empty();
                     var isDataValid = false;
                     isDataValid = CZ.Authoring.validateTimelineData(_this.startDate.getDate(), _this.endDate.getDate(), _this.titleInput.val());
                     if(!CZ.Authoring.isNotEmpty(_this.titleInput.val())) {
-                        _this.errorMessage.text('Title is empty');
-                    } else if(!CZ.Authoring.isIntervalPositive(_this.startDate.getDate(), _this.endDate.getDate())) {
+                        _this.titleInput.showError("Title can't be empty");
+                    }
+                    if(!CZ.Authoring.isIntervalPositive(_this.startDate.getDate(), _this.endDate.getDate())) {
                         _this.errorMessage.text('Time interval should no less than one day');
                     }
                     if(!isDataValid) {
@@ -11245,9 +11352,9 @@ var CZ;
                             self.timeline.onmouseclick();
                         }, function (error) {
                             if(error !== undefined && error !== null) {
-                                self.errorMessage.text(error);
+                                self.errorMessage.text(error).show().delay(7000).fadeOut();
                             } else {
-                                alert("Unable to save changes. Please try again later.");
+                                self.errorMessage.text("Sorry, internal server error :(").show().delay(7000).fadeOut();
                             }
                             console.log(error);
                         }).always(function () {
@@ -11281,6 +11388,7 @@ var CZ;
                     complete: function () {
                         _this.endDate.remove();
                         _this.startDate.remove();
+                        _this.titleInput.hideError();
                     }
                 });
                 if(this.isCancel && CZ.Authoring.mode === "createTimeline") {
@@ -11385,6 +11493,7 @@ var CZ;
         var FormEditExhibit = (function (_super) {
             __extends(FormEditExhibit, _super);
             function FormEditExhibit(container, formInfo) {
+                var _this = this;
                         _super.call(this, container, formInfo);
                 this.titleTextblock = container.find(formInfo.titleTextblock);
                 this.titleInput = container.find(formInfo.titleInput);
@@ -11394,6 +11503,9 @@ var CZ;
                 this.errorMessage = container.find(formInfo.errorMessage);
                 this.saveButton = container.find(formInfo.saveButton);
                 this.deleteButton = container.find(formInfo.deleteButton);
+                this.titleInput.focus(function () {
+                    _this.titleInput.hideError();
+                });
                 this.contentItemsTemplate = formInfo.contentItemsTemplate;
                 this.exhibit = formInfo.context;
                 this.exhibitCopy = $.extend({
@@ -11534,6 +11646,12 @@ var CZ;
                     contentItems: this.exhibit.contentItems || [],
                     type: "infodot"
                 };
+                if(!CZ.Authoring.isNotEmpty(this.titleInput.val())) {
+                    this.titleInput.showError("Title can't be empty");
+                }
+                if(CZ.Authoring.checkExhibitIntersections(this.exhibit.parent, newExhibit, true)) {
+                    this.errorMessage.text("Exhibit intersects other elemenets");
+                }
                 if(CZ.Authoring.validateExhibitData(this.datePicker.getDate(), this.titleInput.val(), this.exhibit.contentItems) && CZ.Authoring.checkExhibitIntersections(this.exhibit.parent, newExhibit, true) && this.exhibit.contentItems.length >= 1 && this.exhibit.contentItems.length <= CZ.Settings.infodotMaxContentItemsCount) {
                     this.saveButton.prop('disabled', true);
                     CZ.Authoring.updateExhibit(this.exhibitCopy, newExhibit).then(function (success) {
@@ -11543,7 +11661,13 @@ var CZ;
                         _this.exhibit.id = arguments[0].id;
                         _this.exhibit.onmouseclick();
                     }, function (error) {
-                        alert("Unable to save changes. Please try again later.");
+                        var errorMessage = JSON.parse(error.responseText).errorMessage;
+                        if(errorMessage !== "") {
+                            _this.errorMessage.text(errorMessage);
+                        } else {
+                            _this.errorMessage.text("Sorry, internal server error :(");
+                        }
+                        _this.errorMessage.show().delay(7000).fadeOut();
                     }).always(function () {
                         _this.saveButton.prop('disabled', false);
                     });
@@ -11554,7 +11678,7 @@ var CZ;
                         return self.errorMessage.text(origMsg);
                     });
                 } else {
-                    this.errorMessage.show().delay(7000).fadeOut();
+                    this.errorMessage.text("One or more fields filled wrong").show().delay(7000).fadeOut();
                 }
             };
             FormEditExhibit.prototype.onDelete = function () {
@@ -11656,6 +11780,7 @@ var CZ;
                     complete: function () {
                         _this.datePicker.remove();
                         _this.contentItemsListBox.clear();
+                        _this.titleInput.hideError();
                     }
                 });
                 if(this.isCancel) {
@@ -11684,6 +11809,7 @@ var CZ;
         var FormEditCI = (function (_super) {
             __extends(FormEditCI, _super);
             function FormEditCI(container, formInfo) {
+                var _this = this;
                         _super.call(this, container, formInfo);
                 this.titleTextblock = container.find(formInfo.titleTextblock);
                 this.titleInput = container.find(formInfo.titleInput);
@@ -11695,6 +11821,15 @@ var CZ;
                 this.errorMessage = container.find(formInfo.errorMessage);
                 this.saveButton = container.find(formInfo.saveButton);
                 this.mediaListContainer = container.find(formInfo.mediaListContainer);
+                this.titleInput.focus(function () {
+                    _this.titleInput.hideError();
+                });
+                this.mediaInput.focus(function () {
+                    _this.mediaInput.hideError();
+                });
+                this.mediaSourceInput.focus(function () {
+                    _this.mediaSourceInput.hideError();
+                });
                 this.prevForm = formInfo.prevForm;
                 this.exhibit = formInfo.context.exhibit;
                 this.contentItem = formInfo.context.contentItem;
@@ -11787,9 +11922,15 @@ var CZ;
                     description: this.descriptionInput.val() || "",
                     order: this.contentItem.order
                 };
+                if(!CZ.Authoring.isNotEmpty(newContentItem.title)) {
+                    this.titleInput.showError("Title can't be empty");
+                }
+                if(!CZ.Authoring.isNotEmpty(newContentItem.uri)) {
+                    this.mediaInput.showError("URL can't be empty");
+                }
                 if(CZ.Authoring.validateContentItems([
                     newContentItem
-                ])) {
+                ], this.mediaInput)) {
                     if(CZ.Authoring.contentItemMode === "createContentItem") {
                         if(this.prevForm && this.prevForm instanceof UI.FormEditExhibit) {
                             this.isCancel = false;
@@ -11820,14 +11961,21 @@ var CZ;
                                 _this.isModified = false;
                                 _this.close();
                             }, function (error) {
-                                alert("Unable to save changes. Please try again later.");
+                                var errorMessage = error.statusText;
+                                if(errorMessage.match(/Media Source/)) {
+                                    _this.errorMessage.text("One or more fields filled wrong");
+                                    _this.mediaSourceInput.showError("Media Source URL is not a valid URL");
+                                } else {
+                                    _this.errorMessage.text("Sorry, internal server error :(");
+                                }
+                                _this.errorMessage.show().delay(7000).fadeOut();
                             }).always(function () {
                                 _this.saveButton.prop('disabled', false);
                             });
                         }
                     }
                 } else {
-                    this.errorMessage.show().delay(7000).fadeOut();
+                    this.errorMessage.text("One or more fields filled wrong").show().delay(7000).fadeOut();
                 }
             };
             FormEditCI.prototype.updateMediaInfo = function () {
@@ -11863,6 +12011,9 @@ var CZ;
                     duration: 500,
                     complete: function () {
                         _this.mediaList.remove();
+                        _this.mediaInput.hideError();
+                        _this.titleInput.hideError();
+                        _this.mediaSourceInput.hideError();
                     }
                 });
                 if(this.isCancel) {
@@ -12772,6 +12923,57 @@ var CZ;
             $("#StartVideoHolder").append(elem);
         }
         StartPage.InitializeStartVideo = InitializeStartVideo;
+        function fillFeaturedTimelines(timelines) {
+            var $template = $("#template-tile .box");
+            var layout = CZ.StartPage.tileLayout[1];
+            for(var i = 0, len = Math.min(layout.Visibility.length, timelines.length); i < len; i++) {
+                var timeline = timelines[i];
+                var timelineUrl = timeline.TimelineUrl;
+                var $startPage = $("#start-page");
+                var $tile = $template.clone(true, true);
+                var $tileImage = $tile.find(".boxInner .tile-photo img");
+                var $tileTitle = $tile.find(".boxInner .tile-meta .tile-meta-title");
+                var $tileAuthor = $tile.find(".boxInner .tile-meta .tile-meta-author");
+                $tile.appendTo(layout.Name).addClass(layout.Visibility[i]).attr("id", "featured" + i).click(function () {
+                    window.location.href = timelineUrl;
+                });
+                $tileImage.load(function (event) {
+                    var $this = $(this);
+                    var width = $this.parent().next().width();
+                    var height = $this.parent().next().height();
+                    if(!$startPage.is(":visible")) {
+                        $startPage.show();
+                        width = $this.parent().next().width();
+                        height = $this.parent().next().height();
+                        $startPage.hide();
+                    }
+                    var naturalHeight = (event.srcElement).naturalHeight;
+                    var naturalWidth = (event.srcElement).naturalWidth;
+                    var ratio = naturalWidth / naturalHeight;
+                    var marginTop = 0;
+                    var marginLeft = 0;
+                    if(naturalWidth > naturalHeight) {
+                        $this.height(height);
+                        $this.width(height * ratio);
+                        marginLeft = ($this.width() - $this.height()) / 2;
+                    } else {
+                        $this.width(width);
+                        $this.height(width / ratio);
+                        marginTop = ($this.height() - $this.width()) / 2;
+                    }
+                    $this.css({
+                        top: -marginTop,
+                        left: -marginLeft
+                    });
+                }).attr({
+                    src: timeline.ImageUrl,
+                    alt: timeline.Title
+                });
+                $tileTitle.text(timeline.Title);
+                $tileAuthor.text(timeline.Author);
+            }
+        }
+        StartPage.fillFeaturedTimelines = fillFeaturedTimelines;
         function show() {
             var $disabledButtons = $(".tour-icon, .timeSeries-icon, .edit-icon");
             $(".home-icon").addClass("active");
@@ -12794,11 +12996,23 @@ var CZ;
         }
         StartPage.hide = hide;
         function initialize() {
-            $(".home-icon").toggle(show, hide);
-            CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
+            $(".home-icon").click(function () {
+                if($("#start-page").is(":visible")) {
+                    hide();
+                } else {
+                    show();
+                }
+            });
+            CZ.Service.getUserFeatured("63c4373e-6712-44a6-9bb4-b99a2783f53a").done(function (response) {
+                fillFeaturedTimelines(response);
+            });
             CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
             CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2);
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
+            var hash = CZ.UrlNav.getURL().hash.path;
+            if(!hash || hash === "/t" + CZ.Settings.guidEmpty) {
+                show();
+            }
         }
         StartPage.initialize = initialize;
     })(CZ.StartPage || (CZ.StartPage = {}));
@@ -13322,7 +13536,6 @@ var CZ;
                         loginForm.close();
                     }
                 });
-                CZ.StartPage.show();
                 CZ.StartPage.initialize();
             });
             CZ.Service.getServiceInformation().then(function (response) {

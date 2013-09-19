@@ -1,3 +1,51 @@
+/* Height of input element */
+/* Font-size of error message */
+/* Error messages */
+.error-message {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  width: auto;
+  height: auto;
+  color: #dd4b39;
+}
+.input-error-message {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  width: auto;
+  height: auto;
+  color: #dd4b39;
+  margin-top: 10px;
+  min-height: 29px;
+  font-size: 1em;
+  line-height: 2em;
+}
+input.error {
+  border: 1px solid #ff4800;
+}
+.form-error-message {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  width: auto;
+  height: auto;
+  color: #dd4b39;
+  margin-top: 10px;
+  padding: 8px 10px;
+  min-height: 29px;
+  font-size: 1em;
+  line-height: 1em;
+}
+/* Common */
+.box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .cz-timescale {
   padding-bottom: 0px;
   font-size: large;
@@ -307,6 +355,7 @@ iframe[sutra=picker] + div {
 
 ***********************************************************/
 .start-page-screen {
+  display: none;
   position: absolute;
   top: 33px;
   bottom: 20px;
@@ -317,8 +366,8 @@ iframe[sutra=picker] + div {
   cursor: default;
   overflow: hidden;
   z-index: 1000;
-  background-image: url(http://localhost:4949/images/background.jpg);
-  background-size: 100% ;
+  background-image: url(/images/background.jpg);
+  background-size: 100%;
 }
 .start-page-section-column {
   float: left;
@@ -418,18 +467,6 @@ iframe[sutra=picker] + div {
   height: 100%;
   border-top: 3px #666 solid;
   overflow: hidden;
-  /*	width: 95%; */
-
-  /*
-	width: 100%;
-	max-width: 188px;
-	z-index: -1;
-	border-top: 3px #666 solid;
-	margin: 0;
-	position: relative;
-	top: 0;
-	*/
-
 }
 .tile-gradient {
   z-index: 120;
@@ -437,21 +474,10 @@ iframe[sutra=picker] + div {
   top: 0;
   left: 0;
   overflow: hidden;
-  /*
-	position: relative;
-	top: -188px;
-	*/
-
   width: 100%;
 }
 .tile-gradient img {
   width: 100%;
-  /*
-	z-index: 120;
-	width: 100%;
-	max-width: 188px;
-	*/
-
 }
 .tile-meta {
   padding: 5%;
@@ -459,14 +485,6 @@ iframe[sutra=picker] + div {
   position: absolute;
   top: 0;
   left: 0;
-  /*
-	width: 100%;
-	width: 100%;
-	max-width: 188px;
-	position: relative;
-	top: -376px;
-	*/
-
 }
 .tile-meta-title {
   font-weight: bold;
@@ -489,13 +507,6 @@ iframe[sutra=picker] + div {
   font-size: 12px;
   display: block;
 }
-/*.WelcomeVideo {
-    position: absolute;
-    top: 5%;
-    bottom: 5%;
-    left: 5%;
-    right: 5%;
-}*/
 .boxInner {
   position: absolute;
   left: 10px;
@@ -1745,6 +1756,22 @@ img.fallbackBackground {
   background-color: #fff;
   text-align: justify;
 }
+.cz-input-wrapper input.error {
+  border: 1px solid #ff4800;
+}
+.cz-input-wrapper div.error {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  width: auto;
+  height: auto;
+  color: #dd4b39;
+  margin-top: 10px;
+  min-height: 29px;
+  font-size: 1em;
+  line-height: 2em;
+}
 .cz-input {
   color: #232323;
   background-color: #E9E9E9;
@@ -1809,7 +1836,18 @@ img.fallbackBackground {
   overflow: hidden;
 }
 .cz-form-errormsg {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  width: auto;
+  height: auto;
   color: #dd4b39;
+  margin-top: 10px;
+  padding: 8px 10px;
+  min-height: 29px;
+  font-size: 1em;
+  line-height: 1em;
   display: block;
 }
 .cz-lightgray {

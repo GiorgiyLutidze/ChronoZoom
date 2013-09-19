@@ -516,7 +516,6 @@ var CZ;
                         loginForm.close();
                     }
                 });
-                CZ.StartPage.show();
                 CZ.StartPage.initialize();
             });
             CZ.Service.getServiceInformation().then(function (response) {
