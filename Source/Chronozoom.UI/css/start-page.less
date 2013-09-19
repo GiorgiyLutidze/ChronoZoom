@@ -1,5 +1,6 @@
 ﻿body {
 }
+
 /***********************************************************
 
   Start page
@@ -7,21 +8,20 @@
 ***********************************************************/
 
 .start-page-screen {
+    display: none;
     position: absolute;
     top: 33px;
     bottom: 20px;
     left: 0%;
     right: 0%;
     min-width: 300px;
-  //  border-radius: 8px;
     background-color: rgba(0,0,0,1);
     cursor: default;
     overflow: hidden;
     z-index: 1000;
-    background-image: url(http://localhost:4949/images/background.jpg);
-    background-size: 100% ;
+    background-image: url(/images/background.jpg);
+    background-size: 100%;
 }
-
 
 .start-page-section-column {
     float: left;
@@ -38,13 +38,13 @@
 }
 
 .FTTiles {
-        color:white;
-        float: left;
-        position:relative;
-        width: calc(100%);
-        height: calc(100%);
-        overflow: hidden;
-    }
+    color: white;
+    float: left;
+    position: relative;
+    width: calc(100%);
+    height: calc(100%);
+    overflow: hidden;
+}
 
 .start-page-welcome-section {
     float: left;
@@ -134,17 +134,7 @@
     width: 100%;
     height: 100%;
     border-top: 3px #666 solid;
-    overflow:hidden;
-    /*	width: 95%; */
-    /*
-	width: 100%;
-	max-width: 188px;
-	z-index: -1;
-	border-top: 3px #666 solid;
-	margin: 0;
-	position: relative;
-	top: 0;
-	*/
+    overflow: hidden;
 }
 
 .tile-gradient {
@@ -152,21 +142,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    overflow:hidden;
-    /*
-	position: relative;
-	top: -188px;
-	*/
+    overflow: hidden;
     width: 100%;
 }
 
     .tile-gradient img {
         width: 100%;
-    /*
-	z-index: 120;
-	width: 100%;
-	max-width: 188px;
-	*/
     }
 
 .tile-meta {
@@ -175,13 +156,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    /*
-	width: 100%;
-	width: 100%;
-	max-width: 188px;
-	position: relative;
-	top: -376px;
-	*/
 }
 
 .tile-meta-title {
@@ -209,23 +183,11 @@
     display: block;
 }
 
-
-/*.WelcomeVideo {
-    position: absolute;
-    top: 5%;
-    bottom: 5%;
-    left: 5%;
-    right: 5%;
-}*/
-
-//////////////////////////////
-
 .boxInner {
     position: absolute;
     left: 10px;
     right: 10px;
     top: 10px;
- //   bottom: 10px;
     overflow: visible;
 }
 
@@ -465,8 +427,7 @@
     }
 
     .welcome-box-1 {
-       // padding: 5px 5px 10px 5px;
-       overflow:hidden;
+        overflow: hidden;
         white-space: nowrap;
         overflow: visible;
         vertical-align: top;
@@ -562,6 +523,3 @@
         box-sizing: border-box;
     }
 }
-
-
-
