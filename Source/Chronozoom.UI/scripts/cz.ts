@@ -608,6 +608,9 @@ module CZ {
                         loginForm.close();
                     }
                 });
+
+                CZ.StartPage.show();
+                CZ.StartPage.initialize();
             });
 
             CZ.Service.getServiceInformation().then(
@@ -834,8 +837,8 @@ module CZ {
                 }));
                 $("#bibliographyBack").css("display", "block");
             }
-            CZ.StartPage.show();
-            CZ.StartPage.initialize();
+           /* CZ.StartPage.show();
+            CZ.StartPage.initialize();*/
         });
 
         export function IsFeatureEnabled(featureMap: FeatureInfo[], featureName: string) {

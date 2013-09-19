@@ -281,6 +281,37 @@
     <Content Include="images\credits\msu.png" />
     <Content Include="images\credits\ucb.png" />
     <Content Include="images\credits\uw.png" />
+    <Content Include="images\dummy\icon_create.png" />
+    <Content Include="images\dummy\icon_down_arrow.png" />
+    <Content Include="images\dummy\icon_help.png" />
+    <Content Include="images\dummy\icon_home.png" />
+    <Content Include="images\dummy\icon_right_arrow.png" />
+    <Content Include="images\dummy\icon_timeseries.png" />
+    <Content Include="images\dummy\icon_twitter.png" />
+    <Content Include="images\dummy\icon_user.png" />
+    <Content Include="images\dummy\list-expander2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\dummy\tile_akhttomb.jpg" />
+    <Content Include="images\dummy\tile_bighistory.jpg" />
+    <Content Include="images\dummy\tile_cern.jpg" />
+    <Content Include="images\dummy\tile_colosseum.jpg" />
+    <Content Include="images\dummy\tile_earthscience.jpg" />
+    <Content Include="images\dummy\tile_gradient.png" />
+    <Content Include="images\dummy\tile_justin_morrill.jpg" />
+    <Content Include="images\dummy\tile_kingtut.jpg" />
+    <Content Include="images\dummy\tile_lucy.jpg" />
+    <Content Include="images\dummy\tile_mayan.jpg" />
+    <Content Include="images\dummy\tile_napoleon.jpg" />
+    <Content Include="images\dummy\tile_plateosaurus.jpg" />
+    <Content Include="images\dummy\tile_pyramid.jpg" />
+    <Content Include="images\dummy\tile_starforming.jpg" />
+    <Content Include="images\dummy\tile_turtle.jpg" />
+    <Content Include="images\dummy\tile_twitterbg.png" />
+    <Content Include="images\dummy\tile_wanapitei.jpg" />
+    <Content Include="images\dummy\tile_ww1.jpg" />
+    <Content Include="images\dummy\twitter_profile_pic.gif" />
+    <Content Include="images\dummy\video_intro.gif" />
     <Content Include="images\edit-icon.png" />
     <Content Include="images\home-icon.png" />
     <Content Include="images\media\bing-import-50x150.png" />
@@ -654,7 +685,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\dummy\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
