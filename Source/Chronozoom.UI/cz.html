@@ -249,63 +249,52 @@
         <div id="message-window" class="cz-form cz-form-left cz-major-form cz-message-window unselectable"></div>
         <div id="header-session-expired-form" class="cz-form cz-form-left cz-session-expired"></div>
         <div id="mediapicker-form" class="cz-form cz-form-left unselectable"></div>
-         <div id ="start-page" class ="start-page-screen">  <!--     <div id ="start-page" class ="start-page-screen">    -->
- 
-            <div id="WelcomeBlock" class="WelcomeBlock" style="color:white; ">
-                              <!--  class="start-page-section-column unselectable"-->
-                    <div class="welcome-box-1">
-                        <h2>Welcome to ChronoZoom!</h2>
-                    </div>
-                    <div class="welcome-box-2">
-                        ChronoZoom is an educational tool for teachers and students who want to put historical events in perspective.
-                        A great many resources have been created already in ChronoZoom for your enjoyment and enlightenment.
-                        <!-- <a style="color:green"; onclick ="document.getElementById('start-page').style.display = 'none';">Enter Here.</a>-->
-                         <a style="color:green" onclick =" CZ.StartPage.hide();">Enter Here.</a>
-                          <div class="welcome-box-3">
+
+        <!-- Start Page -->
+        <div id="start-page" class="start-page-screen">
+
+            <div id="WelcomeBlock" class="WelcomeBlock" style="color: white;">
+                <div class="welcome-box-1">
+                    <h2>Welcome to ChronoZoom!</h2>
+                </div>
+                <div class="welcome-box-2">
+                    ChronoZoom is an educational tool for teachers and students who want to put historical events in perspective.
+                    A great many resources have been created already in ChronoZoom for your enjoyment and enlightenment.
+                    <a style="color: green;" onclick="CZ.StartPage.hide();">Enter Here.</a>
+                    <div class="welcome-box-3">
                         Use ChronoZoom to get a perspective of the extensive scale of time and historical events relative to what happened around the world.
                         Become and author yourself, simply log on with your social networking credentials to record your unique perspective or tell a story that needs to be told.
-                      <!--  <a style="color:green"; onclick ="document.getElementById('start-page').style.display = 'none';CZ.Tours.tours[1].play();">Take Intro Tour.</a>-->
-                        <a style="color:green" onclick ="CZ.StartPage.hide(); CZ.StartPage.PlayIntroTour();">Take Intro Tour.</a>
-                     </div>
+                        <a style="color: green;" onclick="CZ.StartPage.hide(); CZ.StartPage.PlayIntroTour();">Take Intro Tour.</a>
                     </div>
-               <!-- <div class="cleardiv"></div>-->
-                   
-                                 <!-- <div id="welcome4">
-                        <a href="#" class="welcome-cta-link-1">Watch an Intro Video <img src="images/video_intro.gif" alt="Watch an Intro Video"></a>
-                   </div>-->
-             </div>
-            <div id="FeaturedTimelinesBlock" class = "FeaturedTimelinesBlock" style="display:block; color:white; overflow: hidden;">
-              <!--  class="start-page-section-column unselectable"-->
-                <div id="FT-icon-heading" style="color:white;border-top: 3px #666 solid;">              
-                    <div><h3 style="float:left;">Featured Timelines</h3></div>
-                    <div class="header-icon toggle-list-button" style="float:right;margin: 18px 10px 0 0;" data-enabled="true" onclick="CZ.StartPage.listFlip('FeaturedTimelinesBlock');">
-                    <!--<a onclick="CZ.StartPage.listFlip('FeaturedTimelinesBlock');">
-                         <img src="Images/dummy/list-expander2.png" alt="Expand List"/> </a>-->
-                    </div>
-                    <div class="cleardiv"></div>
-                      </div>
-                    <div id="FeaturedTimelinesBlock-tiles" class = "FTTiles" style = "display:block;"></div>
-                    <div id="FeaturedTimelinesBlock-list"  style="display:none;color:white;"></div>
+                </div>
+            </div>
 
+            <div id="FeaturedTimelinesBlock" class="FeaturedTimelinesBlock" style="display: block; color: white; overflow: hidden;">
+                <div id="FT-icon-heading" style="color: white; border-top: 3px #666 solid;">              
+                    <div><h3 style="float: left;">Featured Timelines</h3></div>
+                    <div class="header-icon toggle-list-button" style="float: right; margin: 18px 10px 0 0;" data-enabled="true" onclick="CZ.StartPage.listFlip('FeaturedTimelinesBlock');">
+                    </div>
+                    <div class="cleardiv"></div>
+                </div>
+                <div id="FeaturedTimelinesBlock-tiles" class="FTTiles" style="display: block;"></div>
+                <div id="FeaturedTimelinesBlock-list" style="display: none; color: white;"></div>
             </div>
-            <div id="PopularTimelinesBlock" class="PopularTimelinesBlock" style="display:none; color:white; overflow: auto;">
-                <div id="PT-icon-heading" style="color:white;border-top: 3px #666 solid;">              
-                    <div><h3 style="float:left;">Popular Timelines</h3></div>
+
+            <div id="PopularTimelinesBlock" class="PopularTimelinesBlock" style="display: none; color: white; overflow: auto;">
+                <div id="PT-icon-heading" style="color: white; border-top: 3px #666 solid;">              
+                    <div><h3 style="float: left;">Popular Timelines</h3></div>
                     <div class="cleardiv"></div>
                 </div>
             </div>
-            <div id="TwitterBlock" class="TwitterBlock" style="display:block; color:white; overflow: hidden;">
-                <div id="twitter-icon-heading" style="color:white;border-top: 3px #666 solid;">              
-                    <div><h3 style="float:left;">Twitter</h3></div>
+
+            <div id="TwitterBlock" class="TwitterBlock" style="display: block; color: white; overflow: hidden;">
+                <div id="twitter-icon-heading" style="color: white; border-top: 3px #666 solid;">              
+                    <div><h3 style="float: left;">Twitter</h3></div>
                     <div class="cleardiv"></div>
                 </div>
             </div>
-         <!--   <div class="cz-form-close-btn">
-              <a class="cz-form-btn" onclick ="CZ.StartPage.TwitterLayout();">
-                    X
-                </a>
-             </div>-->
-            <div id="template-list" style="display:none;">
+
+            <div id="template-list" style="display: none;">
                 <div class="list-item">
                     <div class="li-title"><a href="#">REPLACE</a></div>
                     <div class="li-author"></div>
@@ -313,7 +302,8 @@
                     <div class="cleardiv"></div>
                 </div>
             </div>
-            <div id="template-tile" style="display:none;">
+
+            <div id="template-tile" style="display: none;">
                 <div class="box">
                     <div class="boxInner">
                         <div class="tile-photo">
@@ -330,26 +320,26 @@
                 </div>
             </div>
 
-            <div id="template-tweet" style="display:none;">
+            <div id="template-tweet" style="display: none;">
                 <div class="box">
-                    <div class="boxInner" style="background-color:grey;">
+                    <div class="boxInner" style="background-color: grey;">
                         <div class="tile-photo">
                             <img src="Images/dummy/tile_twitterbg.png" alt=""/>
                         </div>
 
-                        <div class="tile-meta" style="height:100%;overflow:visible;">
+                        <div class="tile-meta" style="height: 100%; overflow: visible;">
                             <span class="tile-meta-title" style="">ChronoZoomer</span>
-                            <div style="width:100%;height:1px;"></div>
+                            <div style="width: 100%; height: 1px;"></div>
                             <div class="tile-meta-author">@ChronoZoomTS</div>
-                            <div class="tile-meta-text">Big History is my favorite course ever </div>
+                            <div class="tile-meta-text">Big History is my favorite course ever</div>
                             <div class="tile-meta-time"></div>
-
                         </div>
                       </div>
                 </div>
             </div>
- <!--      </div>       --></div>
-       
+
+        </div>
+
     </div>
 
     <script src="https://cz-nodelete-chronozoom-test.accesscontrol.windows.net/v2/metadata/IdentityProviders.js?protocol=wsfederation&amp;realm=http%3a%2f%2ftest.chronozoomproject.org%2f&amp;reply_to=&amp;context=&amp;request_id=&amp;version=1.0&amp;callback=ShowSigninPage" type="text/javascript"></script>

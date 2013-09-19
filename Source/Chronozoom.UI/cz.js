@@ -12923,6 +12923,57 @@ var CZ;
             $("#StartVideoHolder").append(elem);
         }
         StartPage.InitializeStartVideo = InitializeStartVideo;
+        function fillFeaturedTimelines(timelines) {
+            var $template = $("#template-tile .box");
+            var layout = CZ.StartPage.tileLayout[1];
+            for(var i = 0, len = Math.min(layout.Visibility.length, timelines.length); i < len; i++) {
+                var timeline = timelines[i];
+                var timelineUrl = timeline.TimelineUrl;
+                var $startPage = $("#start-page");
+                var $tile = $template.clone(true, true);
+                var $tileImage = $tile.find(".boxInner .tile-photo img");
+                var $tileTitle = $tile.find(".boxInner .tile-meta .tile-meta-title");
+                var $tileAuthor = $tile.find(".boxInner .tile-meta .tile-meta-author");
+                $tile.appendTo(layout.Name).addClass(layout.Visibility[i]).attr("id", "featured" + i).click(function () {
+                    window.location.href = timelineUrl;
+                });
+                $tileImage.load(function (event) {
+                    var $this = $(this);
+                    var width = $this.parent().next().width();
+                    var height = $this.parent().next().height();
+                    if(!$startPage.is(":visible")) {
+                        $startPage.show();
+                        width = $this.parent().next().width();
+                        height = $this.parent().next().height();
+                        $startPage.hide();
+                    }
+                    var naturalHeight = (event.srcElement).naturalHeight;
+                    var naturalWidth = (event.srcElement).naturalWidth;
+                    var ratio = naturalWidth / naturalHeight;
+                    var marginTop = 0;
+                    var marginLeft = 0;
+                    if(naturalWidth > naturalHeight) {
+                        $this.height(height);
+                        $this.width(height * ratio);
+                        marginLeft = ($this.width() - $this.height()) / 2;
+                    } else {
+                        $this.width(width);
+                        $this.height(width / ratio);
+                        marginTop = ($this.height() - $this.width()) / 2;
+                    }
+                    $this.css({
+                        top: -marginTop,
+                        left: -marginLeft
+                    });
+                }).attr({
+                    src: timeline.ImageUrl,
+                    alt: timeline.Title
+                });
+                $tileTitle.text(timeline.Title);
+                $tileAuthor.text(timeline.Author);
+            }
+        }
+        StartPage.fillFeaturedTimelines = fillFeaturedTimelines;
         function show() {
             var $disabledButtons = $(".tour-icon, .timeSeries-icon, .edit-icon");
             $(".home-icon").addClass("active");
@@ -12945,11 +12996,23 @@ var CZ;
         }
         StartPage.hide = hide;
         function initialize() {
-            $(".home-icon").toggle(show, hide);
-            CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1);
+            $(".home-icon").click(function () {
+                if($("#start-page").is(":visible")) {
+                    hide();
+                } else {
+                    show();
+                }
+            });
+            CZ.Service.getUserFeatured("63c4373e-6712-44a6-9bb4-b99a2783f53a").done(function (response) {
+                fillFeaturedTimelines(response);
+            });
             CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
             CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2);
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
+            var hash = CZ.UrlNav.getURL().hash.path;
+            if(!hash || hash === "/t" + CZ.Settings.guidEmpty) {
+                show();
+            }
         }
         StartPage.initialize = initialize;
     })(CZ.StartPage || (CZ.StartPage = {}));
@@ -13473,7 +13536,6 @@ var CZ;
                         loginForm.close();
                     }
                 });
-                CZ.StartPage.show();
                 CZ.StartPage.initialize();
             });
             CZ.Service.getServiceInformation().then(function (response) {
@@ -13832,73 +13894,3 @@ var CZ;
     })(CZ.HomePageViewModel || (CZ.HomePageViewModel = {}));
     var HomePageViewModel = CZ.HomePageViewModel;
 })(CZ || (CZ = {}));
-(function ($) {
-    $.fn.showError = function (msg, className, props) {
-        className = className || "error";
-        props = props || {
-        };
-        $.extend(true, props, {
-            class: className,
-            text: msg
-        });
-        var $errorTemplate = $("<div></div>", props).attr("error", true);
-        var $allErrors = $();
-        var $errorElems = $();
-        var result = this.each(function () {
-            var $this = $(this);
-            var isDiv;
-            var $div;
-            var $error;
-            if(!$this.data("error")) {
-                isDiv = $this.is("div");
-                $div = isDiv ? $this : $this.closest("div");
-                $error = $errorTemplate.clone();
-                $allErrors = $allErrors.add($error);
-                $errorElems = $errorElems.add($this);
-                $errorElems = $errorElems.add($div);
-                $errorElems = $errorElems.add($div.children());
-                $this.data("error", $error);
-                if(isDiv) {
-                    $div.append($error);
-                } else {
-                    $this.after($error);
-                }
-            }
-        });
-        if($allErrors.length > 0) {
-            $errorElems.addClass(className);
-            $allErrors.slideDown(CZ.Settings.errorMessageSlideDuration);
-        }
-        return result;
-    };
-    $.fn.hideError = function () {
-        var $allErrors = $();
-        var $errorElems = $();
-        var classes = "";
-        var result = this.each(function () {
-            var $this = $(this);
-            var $error = $this.data("error");
-            var $div;
-            var className;
-            if($error) {
-                $div = $this.is("div") ? $this : $this.closest("div");
-                className = $error.attr("class");
-                if(classes.split(" ").indexOf(className) === -1) {
-                    classes += " " + className;
-                }
-                $allErrors = $allErrors.add($error);
-                $errorElems = $errorElems.add($this);
-                $errorElems = $errorElems.add($div);
-                $errorElems = $errorElems.add($div.children());
-            }
-        });
-        if($allErrors.length > 0) {
-            $allErrors.slideUp(CZ.Settings.errorMessageSlideDuration).promise().done(function () {
-                $allErrors.remove();
-                $errorElems.removeData("error");
-                $errorElems.removeClass(classes);
-            });
-        }
-        return result;
-    };
-})(jQuery);

@@ -27,6 +27,8 @@ using System.Data.Entity;
 using Chronozoom.UI.Utils;
 using System.ServiceModel.Description;
 using System.Text.RegularExpressions;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Chronozoom.UI
 {
@@ -2176,15 +2178,22 @@ namespace Chronozoom.UI
                 {
                     if (storage.GetPrefix(t.Object) == "cztimeline")
                     {
+                        string imageUrl = String.Empty;
                         var g = new Guid(storage.GetValue(t.Object));
-                        var timeline = storage.Timelines.Where(x => x.Id == g).Include(f => f.Collection).Include(u => u.Collection.User).FirstOrDefault();
+                        var timeline = storage.Timelines.Where(x => x.Id == g)
+                            .Include("Collection")
+                            .Include("Collection.User")
+                            .Include("Exhibits")
+                            .Include("Exhibits.ContentItems")
+                            .FirstOrDefault();
 
                         //ToDo: get image url
                         if (timeline != null)
+                            imageUrl = getTimelineImageUrl(timeline);
                             elements.Add(new TimelineShortcut()
                             {
                                 Title = timeline.Title,
-                                ImageUrl = "/images/chronozoom.png",
+                                ImageUrl = !string.IsNullOrEmpty(imageUrl) ? imageUrl : "/images/chronozoom.png",
                                 TimelineUrl = String.Format("/{0}/{1}/#{2}", timeline.Collection.User.DisplayName, timeline.Collection.Title, storage.GetContentPath(timeline.Collection.Id, timeline.Id, null)),
                                 Author = timeline.Collection.User.DisplayName
                             });
@@ -2201,8 +2210,9 @@ namespace Chronozoom.UI
 
             return ApiOperation<bool>(delegate(User user, Storage storage)
             {
-                if (user == null)
-                {
+                if (user == null) {
+                    // NOTE: Use this for test with anonymous user.
+                    // user = new User() { Id = new Guid("63c4373e-6712-44a6-9bb4-b99a2783f53a") };
                     return false;
                 }
                 return storage.PutTriplet(String.Format("czusr:{0}", user.Id), "czpred:featured", String.Format("cztimeline:{0}", faturedGUID));
@@ -2224,5 +2234,21 @@ namespace Chronozoom.UI
             });
         }
         #endregion
+
+        private static string getTimelineImageUrl(Timeline timeline)
+        {
+            foreach (var exhibit in timeline.Exhibits)
+            {
+                foreach (var contentItem in exhibit.ContentItems)
+                {
+                    if (contentItem.MediaType.ToLower().Equals("picture"))
+                    {
+                        return contentItem.Uri;
+                    }
+                }
+            }
+
+            return String.Empty;
+        }
     }
 }
