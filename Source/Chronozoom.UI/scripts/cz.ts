@@ -143,6 +143,11 @@ module CZ {
                 Name: "Skydrive",
                 Activation: FeatureActivation.Enabled
             },
+            {
+                Name: "StartPage",
+                Activation: FeatureActivation.NotProduction,
+                JQueryReference: ".header-icon.home-icon"
+            },
         ];
 
         export var rootCollection: bool;
@@ -610,7 +615,9 @@ module CZ {
                 });
 
                 // Show home page.
-                CZ.StartPage.initialize();
+                if (IsFeatureEnabled(_featureMap, "StartPage")) {
+                    CZ.StartPage.initialize();
+                }
             });
 
             CZ.Service.getServiceInformation().then(

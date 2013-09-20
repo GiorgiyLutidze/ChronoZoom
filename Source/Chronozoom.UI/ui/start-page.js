@@ -133,8 +133,25 @@ var CZ;
         }
         StartPage.cloneTweetTemplate = cloneTweetTemplate;
         function PlayIntroTour() {
-            var toursListForm = CZ.HomePageViewModel.getFormById("#toursList");
-            toursListForm.toursListBox.TakeTour(CZ.Tours.tours[0]);
+            var intoTour = CZ.Tours.tours[0];
+            if(typeof intoTour === "undefined") {
+                return false;
+            }
+            CZ.Tours.tourCaptionForm = new CZ.UI.FormTourCaption(CZ.Tours.tourCaptionFormContainer, {
+                activationSource: $(".tour-icon"),
+                navButton: ".cz-form-nav",
+                closeButton: ".cz-tour-form-close-btn > .cz-form-btn",
+                titleTextblock: ".cz-tour-form-title",
+                contentContainer: ".cz-form-content",
+                minButton: ".cz-tour-form-min-btn > .cz-form-btn",
+                captionTextarea: ".cz-form-tour-caption",
+                tourPlayerContainer: ".cz-form-tour-player",
+                bookmarksCount: ".cz-form-tour-bookmarks-count",
+                narrationToggle: ".cz-toggle-narration",
+                context: intoTour
+            });
+            CZ.Tours.tourCaptionForm.show();
+            CZ.Tours.activateTour(intoTour, undefined);
         }
         StartPage.PlayIntroTour = PlayIntroTour;
         function TwitterLayout(target, idx) {
