@@ -12894,7 +12894,6 @@ var CZ;
                     var myDate = new Date(time.match(/\d+/)[0] * 1);
                     var convertedDate = myDate.toLocaleTimeString() + "; " + myDate.getDate();
                     convertedDate += "." + myDate.getMonth() + "." + myDate.getFullYear();
-                    console.log(response);
                     $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-text").text(text);
                     $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-author").text(author);
                     $("#m" + idx + "i" + i + " .boxInner .tile-meta .tile-meta-time").text(convertedDate);
@@ -12963,6 +12962,22 @@ var CZ;
             }
         }
         StartPage.fillFeaturedTimelines = fillFeaturedTimelines;
+        function fillFeaturedTimelinesList(timelines) {
+            var template = "#template-list .list-item";
+            var target = "#FeaturedTimelinesBlock-list";
+            for(var i = 0; i < Math.min(StartPage.tileData.length, timelines.length); i++) {
+                var timeline = timelines[i];
+                var timelineUrl = timeline.TimelineUrl;
+                var TemplateClone = $(template).clone(true, true).appendTo(target);
+                var Name = "featured-list-elem" + i;
+                var idx = 1;
+                TemplateClone.attr("id", "l" + idx + "i" + i);
+                $("#l" + idx + "i" + i + " .li-title a").attr("href", timelineUrl);
+                $("#l" + idx + "i" + i + " .li-title a").text(timeline.Title);
+                $("#l" + idx + "i" + i + " .li-author").text(timeline.Author);
+            }
+        }
+        StartPage.fillFeaturedTimelinesList = fillFeaturedTimelinesList;
         function show() {
             var $disabledButtons = $(".tour-icon, .timeSeries-icon, .edit-icon");
             $(".home-icon").addClass("active");
@@ -12994,8 +13009,8 @@ var CZ;
             });
             CZ.Service.getUserFeatured("63c4373e-6712-44a6-9bb4-b99a2783f53a").done(function (response) {
                 fillFeaturedTimelines(response);
+                fillFeaturedTimelinesList(response);
             });
-            CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1);
             CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2);
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
             var hash = CZ.UrlNav.getURL().hash.path;
@@ -13883,73 +13898,3 @@ var CZ;
     })(CZ.HomePageViewModel || (CZ.HomePageViewModel = {}));
     var HomePageViewModel = CZ.HomePageViewModel;
 })(CZ || (CZ = {}));
-(function ($) {
-    $.fn.showError = function (msg, className, props) {
-        className = className || "error";
-        props = props || {
-        };
-        $.extend(true, props, {
-            class: className,
-            text: msg
-        });
-        var $errorTemplate = $("<div></div>", props).attr("error", true);
-        var $allErrors = $();
-        var $errorElems = $();
-        var result = this.each(function () {
-            var $this = $(this);
-            var isDiv;
-            var $div;
-            var $error;
-            if(!$this.data("error")) {
-                isDiv = $this.is("div");
-                $div = isDiv ? $this : $this.closest("div");
-                $error = $errorTemplate.clone();
-                $allErrors = $allErrors.add($error);
-                $errorElems = $errorElems.add($this);
-                $errorElems = $errorElems.add($div);
-                $errorElems = $errorElems.add($div.children());
-                $this.data("error", $error);
-                if(isDiv) {
-                    $div.append($error);
-                } else {
-                    $this.after($error);
-                }
-            }
-        });
-        if($allErrors.length > 0) {
-            $errorElems.addClass(className);
-            $allErrors.slideDown(CZ.Settings.errorMessageSlideDuration);
-        }
-        return result;
-    };
-    $.fn.hideError = function () {
-        var $allErrors = $();
-        var $errorElems = $();
-        var classes = "";
-        var result = this.each(function () {
-            var $this = $(this);
-            var $error = $this.data("error");
-            var $div;
-            var className;
-            if($error) {
-                $div = $this.is("div") ? $this : $this.closest("div");
-                className = $error.attr("class");
-                if(classes.split(" ").indexOf(className) === -1) {
-                    classes += " " + className;
-                }
-                $allErrors = $allErrors.add($error);
-                $errorElems = $errorElems.add($this);
-                $errorElems = $errorElems.add($div);
-                $errorElems = $errorElems.add($div.children());
-            }
-        });
-        if($allErrors.length > 0) {
-            $allErrors.slideUp(CZ.Settings.errorMessageSlideDuration).promise().done(function () {
-                $allErrors.remove();
-                $errorElems.removeData("error");
-                $errorElems.removeClass(classes);
-            });
-        }
-        return result;
-    };
-})(jQuery);

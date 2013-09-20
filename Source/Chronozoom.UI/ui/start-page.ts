@@ -164,7 +164,6 @@ module CZ {
                 var myDate = new Date(time.match(/\d+/)[0] * 1);
                 var convertedDate = myDate.toLocaleTimeString() +"; "+  myDate.getDate();
                 convertedDate += "." + myDate.getMonth() + "." + myDate.getFullYear();
-                console.log(response);
                 $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-text").text(text);
                 $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-author").text(author);
                  $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-time").text(convertedDate);
@@ -252,6 +251,25 @@ module CZ {
             }
         }
 
+        export function fillFeaturedTimelinesList(timelines) {
+            var template = "#template-list .list-item";
+            var target = "#FeaturedTimelinesBlock-list";
+
+            for( var i = 0; i <Math.min(tileData.length, timelines.length) ; i++){
+                var timeline = timelines[i];
+                var timelineUrl = timeline.TimelineUrl;
+
+                var TemplateClone=$(template).clone( true, true).appendTo(target);
+
+                var Name = "featured-list-elem" + i;
+                var idx = 1;
+                TemplateClone.attr("id","l"+idx+"i"+i);
+                $("#l" + idx + "i" + i + " .li-title a").attr("href",timelineUrl);
+                $("#l" + idx + "i" + i + " .li-title a").text(timeline.Title);
+                $("#l" + idx + "i" + i + " .li-author").text(timeline.Author);
+            }
+        }
+
         export function show() {
             var $disabledButtons = $(".tour-icon, .timeSeries-icon, .edit-icon");
             $(".home-icon").addClass("active");
@@ -300,11 +318,12 @@ module CZ {
             // TODO: Replace with current user.
             CZ.Service.getUserFeatured("63c4373e-6712-44a6-9bb4-b99a2783f53a").done(function (response) {
                 fillFeaturedTimelines(response);
+                fillFeaturedTimelinesList(response);
             });
 
             // CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 1); /* featured Timelines */
             //CZ.StartPage.cloneTileTemplate("#template-tile .box", CZ.StartPage.tileLayout, 2); /* popular Timelines */
-            CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1); /* featured Timelines */
+           // CZ.StartPage.cloneListTemplate("#template-list .list-item", "#FeaturedTimelinesBlock-list", 1); /* featured Timelines */
 
             CZ.StartPage.cloneTweetTemplate("#template-tweet .box", CZ.StartPage.tileLayout, 2); /* Tweeted Timelines */
             CZ.StartPage.TwitterLayout(CZ.StartPage.tileLayout, 2);
