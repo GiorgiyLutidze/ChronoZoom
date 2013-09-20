@@ -12881,8 +12881,25 @@ var CZ;
         }
         StartPage.cloneTweetTemplate = cloneTweetTemplate;
         function PlayIntroTour() {
-            var toursListForm = CZ.HomePageViewModel.getFormById("#toursList");
-            toursListForm.toursListBox.TakeTour(CZ.Tours.tours[0]);
+            var intoTour = CZ.Tours.tours[0];
+            if(typeof intoTour === "undefined") {
+                return false;
+            }
+            CZ.Tours.tourCaptionForm = new CZ.UI.FormTourCaption(CZ.Tours.tourCaptionFormContainer, {
+                activationSource: $(".tour-icon"),
+                navButton: ".cz-form-nav",
+                closeButton: ".cz-tour-form-close-btn > .cz-form-btn",
+                titleTextblock: ".cz-tour-form-title",
+                contentContainer: ".cz-form-content",
+                minButton: ".cz-tour-form-min-btn > .cz-form-btn",
+                captionTextarea: ".cz-form-tour-caption",
+                tourPlayerContainer: ".cz-form-tour-player",
+                bookmarksCount: ".cz-form-tour-bookmarks-count",
+                narrationToggle: ".cz-toggle-narration",
+                context: intoTour
+            });
+            CZ.Tours.tourCaptionForm.show();
+            CZ.Tours.activateTour(intoTour, undefined);
         }
         StartPage.PlayIntroTour = PlayIntroTour;
         function TwitterLayout(target, idx) {
@@ -13121,6 +13138,11 @@ var CZ;
             {
                 Name: "Skydrive",
                 Activation: FeatureActivation.Enabled
+            }, 
+            {
+                Name: "StartPage",
+                Activation: FeatureActivation.NotProduction,
+                JQueryReference: ".header-icon.home-icon"
             }, 
             
         ];
@@ -13540,7 +13562,9 @@ var CZ;
                         loginForm.close();
                     }
                 });
-                CZ.StartPage.initialize();
+                if(IsFeatureEnabled(_featureMap, "StartPage")) {
+                    CZ.StartPage.initialize();
+                }
             });
             CZ.Service.getServiceInformation().then(function (response) {
                 CZ.Settings.contentItemThumbnailBaseUri = response.thumbnailsPath;
@@ -13898,3 +13922,73 @@ var CZ;
     })(CZ.HomePageViewModel || (CZ.HomePageViewModel = {}));
     var HomePageViewModel = CZ.HomePageViewModel;
 })(CZ || (CZ = {}));
+(function ($) {
+    $.fn.showError = function (msg, className, props) {
+        className = className || "error";
+        props = props || {
+        };
+        $.extend(true, props, {
+            class: className,
+            text: msg
+        });
+        var $errorTemplate = $("<div></div>", props).attr("error", true);
+        var $allErrors = $();
+        var $errorElems = $();
+        var result = this.each(function () {
+            var $this = $(this);
+            var isDiv;
+            var $div;
+            var $error;
+            if(!$this.data("error")) {
+                isDiv = $this.is("div");
+                $div = isDiv ? $this : $this.closest("div");
+                $error = $errorTemplate.clone();
+                $allErrors = $allErrors.add($error);
+                $errorElems = $errorElems.add($this);
+                $errorElems = $errorElems.add($div);
+                $errorElems = $errorElems.add($div.children());
+                $this.data("error", $error);
+                if(isDiv) {
+                    $div.append($error);
+                } else {
+                    $this.after($error);
+                }
+            }
+        });
+        if($allErrors.length > 0) {
+            $errorElems.addClass(className);
+            $allErrors.slideDown(CZ.Settings.errorMessageSlideDuration);
+        }
+        return result;
+    };
+    $.fn.hideError = function () {
+        var $allErrors = $();
+        var $errorElems = $();
+        var classes = "";
+        var result = this.each(function () {
+            var $this = $(this);
+            var $error = $this.data("error");
+            var $div;
+            var className;
+            if($error) {
+                $div = $this.is("div") ? $this : $this.closest("div");
+                className = $error.attr("class");
+                if(classes.split(" ").indexOf(className) === -1) {
+                    classes += " " + className;
+                }
+                $allErrors = $allErrors.add($error);
+                $errorElems = $errorElems.add($this);
+                $errorElems = $errorElems.add($div);
+                $errorElems = $errorElems.add($div.children());
+            }
+        });
+        if($allErrors.length > 0) {
+            $allErrors.slideUp(CZ.Settings.errorMessageSlideDuration).promise().done(function () {
+                $allErrors.remove();
+                $errorElems.removeData("error");
+                $errorElems.removeClass(classes);
+            });
+        }
+        return result;
+    };
+})(jQuery);

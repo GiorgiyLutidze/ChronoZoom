@@ -98,6 +98,11 @@ var CZ;
                 Name: "Skydrive",
                 Activation: FeatureActivation.Enabled
             }, 
+            {
+                Name: "StartPage",
+                Activation: FeatureActivation.NotProduction,
+                JQueryReference: ".header-icon.home-icon"
+            }, 
             
         ];
         HomePageViewModel.rootCollection;
@@ -516,7 +521,9 @@ var CZ;
                         loginForm.close();
                     }
                 });
-                CZ.StartPage.initialize();
+                if(IsFeatureEnabled(_featureMap, "StartPage")) {
+                    CZ.StartPage.initialize();
+                }
             });
             CZ.Service.getServiceInformation().then(function (response) {
                 CZ.Settings.contentItemThumbnailBaseUri = response.thumbnailsPath;
