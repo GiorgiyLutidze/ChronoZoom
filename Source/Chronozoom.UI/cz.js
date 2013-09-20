@@ -12912,17 +12912,6 @@ var CZ;
             }
         }
         StartPage.listFlip = listFlip;
-        function InitializeStartVideo() {
-            var id = "StartVideoId";
-            var videoSrc = 'http://video-js.zencoder.com/oceans-clip.mp4';
-            var elem = document.createElement('iframe');
-            elem.setAttribute("id", id);
-            elem.setAttribute("src", videoSrc);
-            elem.setAttribute("visible", 'true');
-            elem.setAttribute("controls", 'true');
-            $("#StartVideoHolder").append(elem);
-        }
-        StartPage.InitializeStartVideo = InitializeStartVideo;
         function fillFeaturedTimelines(timelines) {
             var $template = $("#template-tile .box");
             var layout = CZ.StartPage.tileLayout[1];

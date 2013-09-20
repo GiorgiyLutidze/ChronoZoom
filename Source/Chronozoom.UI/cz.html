@@ -253,48 +253,41 @@
         <!-- Start Page -->
         <div id="start-page" class="start-page-screen">
 
-            <div id="WelcomeBlock" class="WelcomeBlock" style="color: white;">
+            <div id="WelcomeBlock" class="WelcomeBlock">
                 <div class="welcome-box-1">
                     <h2>Welcome to ChronoZoom!</h2>
                 </div>
                 <div class="welcome-box-2">
                     ChronoZoom is an educational tool for teachers and students who want to put historical events in perspective.
                     A great many resources have been created already in ChronoZoom for your enjoyment and enlightenment.
-                    <a style="color: green;" onclick="CZ.StartPage.hide();">Enter Here.</a>
+                    <a class = "welcome-link"  onclick="CZ.StartPage.hide();">Enter Here.</a>
                     <div class="welcome-box-3">
                         Use ChronoZoom to get a perspective of the extensive scale of time and historical events relative to what happened around the world.
                         Become and author yourself, simply log on with your social networking credentials to record your unique perspective or tell a story that needs to be told.
-                        <a style="color: green;" onclick="CZ.StartPage.hide(); CZ.StartPage.PlayIntroTour();">Take Intro Tour.</a>
+                        <a class = "welcome-link" onclick="CZ.StartPage.hide(); CZ.StartPage.PlayIntroTour();">Take Intro Tour.</a>
                     </div>
                 </div>
             </div>
 
-            <div id="FeaturedTimelinesBlock" class="FeaturedTimelinesBlock" style="display: block; color: white; overflow: hidden;">
-                <div id="FT-icon-heading" style="color: white; border-top: 3px #666 solid;">              
-                    <div><h3 style="float: left;">Featured Timelines</h3></div>
-                    <div class="header-icon toggle-list-button" style="float: right; margin: 18px 10px 0 0;" data-enabled="true" onclick="CZ.StartPage.listFlip('FeaturedTimelinesBlock');">
+            <div id="FeaturedTimelinesBlock" class="FeaturedTimelinesBlock">
+                <div class="block-header">              
+                    <div>Featured Timelines</h3></div>
+                    <div class="header-icon toggle-list-button" data-enabled="true" onclick="CZ.StartPage.listFlip('FeaturedTimelinesBlock');">
                     </div>
                     <div class="cleardiv"></div>
                 </div>
-                <div id="FeaturedTimelinesBlock-tiles" class="FTTiles" style="display: block;"></div>
-                <div id="FeaturedTimelinesBlock-list" style="display: none; color: white;"></div>
+                <div id="FeaturedTimelinesBlock-tiles" class="FTTiles"></div>
+                <div id="FeaturedTimelinesBlock-list" class = "FTList"></div>
             </div>
 
-            <div id="PopularTimelinesBlock" class="PopularTimelinesBlock" style="display: none; color: white; overflow: auto;">
-                <div id="PT-icon-heading" style="color: white; border-top: 3px #666 solid;">              
-                    <div><h3 style="float: left;">Popular Timelines</h3></div>
+            <div id="TwitterBlock" class="TwitterBlock">
+                <div class = "block-header">              
+                    <div><h3>Twitter</h3></div>
                     <div class="cleardiv"></div>
                 </div>
             </div>
 
-            <div id="TwitterBlock" class="TwitterBlock" style="display: block; color: white; overflow: hidden;">
-                <div id="twitter-icon-heading" style="color: white; border-top: 3px #666 solid;">              
-                    <div><h3 style="float: left;">Twitter</h3></div>
-                    <div class="cleardiv"></div>
-                </div>
-            </div>
-
-            <div id="template-list" style="display: none;">
+            <div id="template-list" class = "template-invisible" style="display:none;">
                 <div class="list-item">
                     <div class="li-title"><a href="#">REPLACE</a></div>
                     <div class="li-author"></div>
@@ -303,7 +296,7 @@
                 </div>
             </div>
 
-            <div id="template-tile" style="display: none;">
+            <div id="template-tile" class = "template-invisible">
                 <div class="box">
                     <div class="boxInner">
                         <div class="tile-photo">
@@ -320,7 +313,7 @@
                 </div>
             </div>
 
-            <div id="template-tweet" style="display: none;">
+            <div id="template-tweet" class = "template-invisible">
                 <div class="box">
                     <div class="boxInner" style="background-color: grey;">
                         <div class="tile-photo">
@@ -329,7 +322,7 @@
 
                         <div class="tile-meta" style="height: 100%; overflow: visible;">
                             <span class="tile-meta-title" style="">ChronoZoomer</span>
-                            <div style="width: 100%; height: 1px;"></div>
+                            <div class="cleardiv"></div>
                             <div class="tile-meta-author">@ChronoZoomTS</div>
                             <div class="tile-meta-text">Big History is my favorite course ever</div>
                             <div class="tile-meta-time"></div>

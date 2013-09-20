@@ -146,11 +146,6 @@ module CZ {
                 var o=$(template).clone( true, true).appendTo(target[idx].Name);
                 o.attr("class",target[idx].Visibility[i]);
                 o.attr("id","m"+idx+"i"+i);
-                /*
-                $("#m"+idx+"i"+i+" .boxInner .tile-photo img").attr("src",tileData[i].Thumbnail).attr("alt",tileData[i].Title);
-                $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-title").text(tileData[i].Title);
-                $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-author").text(tileData[i].Author);
-                */
             }
         }
 
@@ -174,10 +169,7 @@ module CZ {
                 $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-author").text(author);
                  $("#m"+idx+"i"+i+" .boxInner .tile-meta .tile-meta-time").text(convertedDate);
                  }
-        
             });
-
-              
         }
 
        export function listFlip(name){
@@ -189,19 +181,6 @@ module CZ {
                     document.getElementById(name+'-list').style.display = 'none';
                     document.getElementById(name+'-tiles').style.display = 'block';
                 }
-        }
-
-
-        export function InitializeStartVideo() {
-            var id = "StartVideoId";
-            var videoSrc = 'http://video-js.zencoder.com/oceans-clip.mp4';
-            var elem = document.createElement('iframe');
-            elem.setAttribute("id", id);
-            elem.setAttribute("src", videoSrc);
-            elem.setAttribute("visible", 'true');
-            elem.setAttribute("controls", 'true');
-            //          elem.setAttribute("class",'WelcomeVideo');
-            $("#StartVideoHolder").append(elem);
         }
 
         export function fillFeaturedTimelines(timelines) {

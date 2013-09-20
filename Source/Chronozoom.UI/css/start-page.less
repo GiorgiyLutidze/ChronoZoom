@@ -21,6 +21,11 @@
     overflow: hidden;
 }
 
+.FTList {
+    display: none;
+     color: white;
+}
+
 .cleardiv {
     clear: both;
     width: 100%;
@@ -106,6 +111,33 @@
     display: block;
 }
 
+.WelcomeBlock {
+    color: white;
+    overflow: hidden;
+    border: dotted 2px #1e1e1e;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.welcome-link {
+    color:green;
+}
+
+.block-header {
+    color: white;
+    border-top: 3px #666 solid;
+ }
+
+.toggle-list-button {
+    float: right; 
+    margin: 18px 10px 0 0;
+ }
+
+.template-invisible {
+    display: none;
+}
+
 @media only screen and (max-width : 650px), screen and (orientation: landscape) and (max-device-width : 480px) {
     /* Small Tablet view: 3 rows, 2 columns */
     .ex3, .ex4, .ex6 {
@@ -122,15 +154,13 @@
     }
 
     .WelcomeBlock {
-        width: calc(100% - 2px);
+        width: calc(100%);
         height: calc(20%);
-        overflow: hidden;
     }
 
     .welcome-box-1 {
         padding: 0px;
         font-size: 10px;
-        white-space: nowrap;
         overflow: visible;
         height: calc(40%);
     }
@@ -170,15 +200,10 @@
         float: left;
         margin: 5px;
         padding: 5px;
-        width: calc(100% - 2px);
+        width: calc(100%);
         height: calc(30%);
-        border: dotted 2px #1e1e1e;
         background-color: transparent;
         vertical-align: top;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        overflow: auto;
     }
 
     .FeaturedTimelinesBlock {
@@ -218,8 +243,6 @@
         border: dotted 2px #1e1e1e;
         background-color: transparent;
         vertical-align: top;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
 
@@ -260,7 +283,6 @@
         width: calc(33.333333% - 2px);
         height: calc(100%);
         border: dotted 2px #1e1e1e;
-        box-sizing:border-box;
     }
 
     .FeaturedTimelinesBlock {
